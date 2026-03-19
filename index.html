@@ -1,647 +1,784 @@
-<!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tecnologia · Terra & Vivo Ads · Comscore Plan Metrix · Ago 2025</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<style>
-:root{--sky:#14B8A6;--sky2:#5EEAD4;--amber:#F59E0B;--amber2:#FCD34D;--coral:#F87171;--violet:#0D9488;--mint:#34D399;--white:#F0F0FF;--sky-dim:rgba(34,211,238,.1);--amber-dim:rgba(13,148,136,.1);--coral-dim:rgba(248,113,113,.1);--violet-dim:rgba(13,148,136,.12);--mint-dim:rgba(52,211,153,.1);--neon:#2DD4BF;--neon2:#99F6E4}
-[data-theme="dark"]{--bg:#020F0F;--bg2:#041A1A;--bg3:#062626;--bg4:#0A3333;--border:rgba(13,148,136,.12);--border2:rgba(13,148,136,.22);--txt:#EDEDFF;--txt2:#9CA3C0;--txt3:#5B5F80;--card:rgba(13,148,136,.04);--card-h:rgba(13,148,136,.08)}
-[data-theme="light"]{--bg:#F0FAF9;--bg2:#E4F5F4;--bg3:#D8EFED;--bg4:#CCE8E5;--border:rgba(13,100,100,.1);--border2:rgba(13,100,100,.18);--txt:#0F0F2E;--txt2:#4A4A70;--txt3:#7B7BA0;--card:rgba(255,255,255,.80);--card-h:rgba(255,255,255,.95)}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;transition:background .35s,color .35s}
-#bg-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-.masthead{position:relative;background:linear-gradient(160deg,#021A1A 0%,#042F2E 45%,#064E3B 100%);border-bottom:1px solid var(--border2);overflow:hidden;z-index:10}
-.masthead::before{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:90%;height:180px;background:radial-gradient(ellipse at center bottom,rgba(13,148,136,.3) 0%,rgba(192,132,252,.15) 40%,transparent 70%);pointer-events:none}
-.masthead-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:44px 52px 52px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.eyebrow-line{width:28px;height:2px;background:linear-gradient(90deg,var(--violet),var(--neon));border-radius:2px}
-.eyebrow-text{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--neon)}
-.brand-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5.5vw,64px);font-weight:700;line-height:1.05;color:var(--white);margin-bottom:8px}
-.brand-title span{display:block;font-style:italic;background:linear-gradient(100deg,var(--violet) 0%,var(--neon) 50%,var(--sky) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.brand-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);letter-spacing:.02em}
-.header-kpis{display:flex;gap:20px;align-items:stretch;flex-wrap:wrap}
-.hkpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 22px;min-width:130px;backdrop-filter:blur(12px);transition:background .2s}
-.hkpi:hover{background:rgba(255,255,255,.09)}
-.hkpi-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
-.hkpi-val{font-family:'Nunito',sans-serif;font-size:28px;font-weight:800;line-height:1}
-.hkpi-sub{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px}
-.hkpi-logo{display:block;height:22px;width:auto;margin:0 auto 2px;object-fit:contain}
-.hkpi-logo-terra{filter:none}
-.hkpi-logo-vivo{filter:brightness(0) invert(1)}
-[data-theme="light"] .hkpi-logo-vivo{filter:none}
-.controls{max-width:1280px;margin:0 auto;padding:10px 52px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(8,8,15,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100}
-@media(max-width:640px){.controls{padding:10px 20px}}
-.nav-tabs{display:flex;gap:3px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:4px}
-.nav-tab{padding:7px 16px;border-radius:10px;font-size:12px;font-weight:600;color:var(--txt2);background:transparent;border:none;cursor:pointer;transition:all .22s;font-family:'Outfit',sans-serif;letter-spacing:.01em;display:flex;align-items:center;gap:5px;white-space:nowrap}
-.nav-tab:hover{color:var(--txt);background:rgba(255,255,255,.07)}
-.nav-tab.active{background:linear-gradient(135deg,rgba(13,148,136,.2),rgba(13,148,136,.08));color:var(--violet);border:1px solid rgba(13,148,136,.3);box-shadow:0 0 14px rgba(13,148,136,.15),inset 0 1px 0 rgba(13,148,136,.12)}
-.ctrl-btns{display:flex;gap:8px;align-items:center}
-.btn{display:flex;align-items:center;gap:7px;padding:8px 18px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all .22s;font-family:'Outfit',sans-serif;letter-spacing:.02em}
-.btn-ghost{background:rgba(255,255,255,.06);color:var(--txt2);border:1px solid var(--border2);backdrop-filter:blur(8px)}
-.btn-ghost:hover{background:rgba(255,255,255,.10);color:var(--txt);border-color:rgba(255,255,255,.2);transform:translateY(-1px)}
-.btn-amber{background:linear-gradient(135deg,#0D9488 0%,#14B8A6 50%,#2DD4BF 100%);color:#fff;font-weight:800;box-shadow:0 4px 18px rgba(13,148,136,.4);border:1px solid rgba(13,148,136,.5)}
-.btn-amber:hover{box-shadow:0 6px 28px rgba(13,148,136,.5);transform:translateY(-2px)}
-.page{position:relative;z-index:1}
-.section-wrap{max-width:1280px;margin:0 auto;padding:52px 52px 24px}
-@media(max-width:700px){.section-wrap{padding:36px 20px 20px}}
-.bp-divider{max-width:1280px;margin:0 auto;padding:0 52px;display:flex;align-items:center;gap:0;position:relative}
-.bp-divider::before,.bp-divider::after{content:'';flex:1;border-top:2px dashed var(--border2)}
-.bp-divider-circle{width:20px;height:20px;border-radius:50%;background:var(--bg);border:2px solid var(--border2);flex-shrink:0;margin:8px}
-.sec-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:32px;flex-wrap:wrap}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.2vw,38px);font-weight:700;line-height:1.15;margin-bottom:6px;position:relative;display:inline-block}
-.sec-title--internet{background:linear-gradient(120deg,#22D3EE 0%,#14B8A6 50%,#2DD4BF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 18px rgba(13,148,136,.35))}
-.sec-title--terra{background:linear-gradient(120deg,#F59E0B 0%,#FBBF24 50%,#FDE68A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 18px rgba(13,148,136,.28))}
-.sec-title--vivo{background:linear-gradient(120deg,#A78BFA 0%,#C4B5FD 50%,#DDD6FE 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 18px rgba(167,139,250,.28))}
-.sec-title--comp{background:linear-gradient(120deg,#F59E0B 0%,#2DD4BF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.sec-title--copa{background:linear-gradient(120deg,#34D399 0%,#14B8A6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.sec-desc{font-size:13px;color:var(--txt2);line-height:1.75;max-width:600px;font-weight:300}
-.sec-logo{height:28px;width:auto;object-fit:contain;vertical-align:middle;margin-right:10px;position:relative;top:-2px}
-.sec-logo-terra{filter:none}
-.sec-logo-vivo{filter:brightness(0) invert(1) drop-shadow(0 0 4px rgba(167,139,250,.6))}
-[data-theme="light"] .sec-logo-vivo{filter:none}
-.grid{display:grid;gap:14px}
-.g2{grid-template-columns:1fr 1fr}
-.g3{grid-template-columns:1fr 1fr 1fr}
-.g4{grid-template-columns:repeat(4,1fr)}
-@media(max-width:960px){.g2,.g3,.g4{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:background .2s,border-color .2s,transform .2s,box-shadow .2s}
-.card:hover{background:var(--card-h);border-color:var(--border2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(13,148,136,.12),0 0 1px rgba(13,148,136,.3)}
-.card[data-accent]::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0}
-.card[data-accent="sky"]::before{background:linear-gradient(90deg,var(--sky),var(--sky2))}
-.card[data-accent="amber"]::before{background:linear-gradient(90deg,var(--amber),var(--amber2))}
-.card[data-accent="violet"]::before{background:linear-gradient(90deg,var(--violet),#C4B5FD)}
-.card[data-accent="mint"]::before{background:linear-gradient(90deg,var(--mint),#6EE7B7)}
-.card[data-accent="coral"]::before{background:linear-gradient(90deg,var(--coral),#FCA5A5)}
-.card[data-glow]::after{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;filter:blur(45px);opacity:.25;pointer-events:none}
-.card[data-glow="sky"]::after{background:var(--sky)}
-.card[data-glow="amber"]::after{background:var(--amber)}
-.card[data-glow="violet"]::after{background:var(--violet)}
-.kpi-lbl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-bottom:10px}
-.kpi-val{font-family:'Nunito',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1;margin-bottom:4px}
-.kpi-sub{font-size:12px;color:var(--txt2);font-weight:300}
-.c-sky{color:var(--sky)}.c-amber{color:var(--amber)}.c-coral{color:var(--coral)}.c-violet{color:var(--violet)}.c-mint{color:var(--mint)}.c-amber2{color:var(--neon)}
-.bars{display:flex;flex-direction:column;gap:11px}
-.bar-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
-.bar-lbl{font-size:12px;color:var(--txt2);flex:1}
-.bar-pct{font-size:12px;font-weight:700;white-space:nowrap}
-.bar-track{height:5px;border-radius:3px;background:var(--bg4);overflow:hidden}
-.bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.3s cubic-bezier(.16,1,.3,1)}
-.bf-sky{background:linear-gradient(90deg,var(--sky),rgba(34,211,238,.3))}
-.bf-amber{background:linear-gradient(90deg,var(--amber),rgba(13,148,136,.4))}
-.bf-violet{background:linear-gradient(90deg,var(--violet),rgba(13,148,136,.3))}
-.bf-mint{background:linear-gradient(90deg,var(--mint),rgba(52,211,153,.4))}
-.bf-coral{background:linear-gradient(90deg,var(--coral),rgba(248,113,113,.4))}
-.stat-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
-.stat-row:last-child{border-bottom:none}
-.stat-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.stat-info{flex:1}
-.stat-name{font-size:13px;margin-bottom:1px}
-.stat-num{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;white-space:nowrap}
-.att-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:560px){.att-grid{grid-template-columns:1fr}}
-.att-item{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;align-items:flex-start;gap:12px;transition:border-color .2s}
-.att-item:hover{border-color:var(--border2)}
-.att-pct{font-family:'Nunito',sans-serif;font-size:28px;font-weight:800;line-height:1;flex-shrink:0}
-.att-txt{font-size:12px;color:var(--txt2);line-height:1.55;padding-top:3px}
-.att-count{font-size:11px;font-weight:600;margin-top:4px}
-.trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-@media(max-width:720px){.trio{grid-template-columns:1fr}}
-.trio-col{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;border-top:3px solid}
-.trio-head{display:flex;align-items:center;gap:8px;margin-bottom:18px}
-.trio-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.trio-name{font-size:11px;font-weight:700;letter-spacing:.10em;text-transform:uppercase}
-.trio-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--txt2)}
-.trio-row:last-child{border-bottom:none}
-.trio-v{font-weight:700;color:var(--txt);font-size:13px}
-.hl-box{display:flex;align-items:flex-start;gap:12px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px}
-.hl-icon{font-size:22px;flex-shrink:0;margin-top:1px}
-.hl-txt{font-size:13px;color:var(--txt2);line-height:1.65;font-weight:300}
-.hl-txt strong{color:var(--txt);font-weight:600}
-.season-banner{position:relative;background:linear-gradient(135deg,rgba(var(--sb-clr),.08) 0%,rgba(var(--sb-clr),.03) 50%,var(--card) 100%);border:1px solid rgba(var(--sb-clr),.2);border-radius:20px;padding:28px;overflow:hidden}
-.sb-pseudo-bg{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:88px;opacity:.06;pointer-events:none;line-height:1}
-.sb-head{margin-bottom:20px}
-.sb-eyebrow{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3);margin-bottom:6px}
-.sb-title{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-.sb-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:20px}
-@media(max-width:860px){.sb-kpis{grid-template-columns:1fr 1fr}}
-.sb-kpi-lbl{font-size:10px;font-weight:600;letter-spacing:.10em;text-transform:uppercase;color:var(--txt3);margin-bottom:6px}
-.sb-kpi-val{font-family:'Nunito',sans-serif;font-size:32px;font-weight:800;line-height:1;margin-bottom:3px}
-.sb-kpi-sub{font-size:11px;color:var(--txt2);font-weight:300}
-.sb-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-@media(max-width:860px){.sb-boxes{grid-template-columns:1fr}}
-.wom-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
-@media(max-width:600px){.wom-row{grid-template-columns:1fr 1fr}}
-.wom-item{padding:18px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:14px}
-.wom-val{font-family:'Nunito',sans-serif;font-size:30px;font-weight:800;line-height:1;margin-bottom:4px}
-.wom-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.10em;color:var(--txt3);margin-bottom:2px}
-.wom-n{font-size:12px;color:var(--txt2);font-weight:300}
-.tag{display:inline-flex;align-items:center;padding:4px 11px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
-.tag-sky{background:var(--sky-dim);color:var(--sky);border-color:rgba(0,212,255,.25)}
-.tag-amber{background:var(--amber-dim);color:var(--amber);border-color:rgba(13,148,136,.25)}
-.tag-violet{background:var(--violet-dim);color:var(--violet);border-color:rgba(167,139,250,.25)}
-.tag-mint{background:var(--mint-dim);color:var(--mint);border-color:rgba(52,211,153,.25)}
-.anim{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
-.anim.vis{opacity:1;transform:translateY(0)}
-.anim-d1{transition-delay:.05s}.anim-d2{transition-delay:.12s}.anim-d3{transition-delay:.19s}.anim-d4{transition-delay:.26s}
-.footer{position:relative;z-index:1;max-width:1280px;margin:24px auto 0;padding:24px 52px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-copy{font-size:11px;color:var(--txt3);font-weight:300;line-height:1.8}
-.footer-copy strong{color:var(--txt2);font-weight:600}
-#scroll-top{position:fixed;bottom:36px;right:36px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#14B8A6);color:#fff;font-size:20px;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(13,148,136,.35);opacity:0;transform:translateY(12px) scale(.85);transition:opacity .3s,transform .3s;pointer-events:none;z-index:999}
-#scroll-top.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
-#scroll-top:hover{background:linear-gradient(135deg,#7DD3FC,var(--sky));box-shadow:0 6px 28px rgba(13,148,136,.5);transform:translateY(-2px) scale(1.05)}
-.brand-logo-icon{width:28px;height:28px;object-fit:contain;display:block;flex-shrink:0}
-.brand-logo-nav{width:14px;height:14px;object-fit:contain;display:inline-block;vertical-align:middle;margin-right:4px;position:relative;top:-1px}
-.brand-logo-terra{border-radius:4px}
-.brand-logo-vivo{filter:brightness(0) invert(1) drop-shadow(0 0 3px rgba(167,139,250,.5))}
-[data-theme="light"] .brand-logo-vivo{filter:none}
-.copa-banner{background:linear-gradient(135deg,rgba(52,211,153,.1),rgba(0,212,255,.06),var(--card));border:1px solid rgba(52,211,153,.25);border-radius:20px;padding:28px;position:relative;overflow:hidden;margin-bottom:14px}
-.copa-banner::before{content:'⚽';position:absolute;right:28px;top:50%;transform:translateY(-50%);font-size:80px;opacity:.07;pointer-events:none}
-.ins-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;border-left:4px solid}
-.ins-card h4{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;margin-bottom:10px}
-.ins-card p{font-size:13px;color:var(--txt2);line-height:1.75;font-weight:300}
-.ins-card strong{color:var(--txt);font-weight:600}
-.ins-mini{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;border-top:3px solid}
-.ins-mini h5{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;margin-bottom:8px}
-.ins-mini p{font-size:12px;color:var(--txt2);line-height:1.65;font-weight:300}
-.ins-mini strong{color:var(--txt);font-weight:600}
-.ins-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:1280px;margin:0 auto;padding:0 52px 14px}
-@media(max-width:700px){.ins-grid2{grid-template-columns:1fr;padding:0 20px 14px}}
-@media print{body{background:#fff!important}#bg-canvas,.controls,.ctrl-btns,#scroll-top{display:none!important}.card{border:1px solid #ddd!important;background:#fff!important}@page{margin:1.2cm}}
-.card,.season-banner,.copa-banner,.trio,.grid,.wom-row,.att-grid,.ins-card,.ins-mini{page-break-inside:avoid;break-inside:avoid}
-.sub-header{display:flex;align-items:center;gap:10px;margin:28px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
-.sub-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.sub-icon-sky{background:var(--sky-dim)}
-.sub-icon-amber{background:var(--amber-dim)}
-.sub-icon-violet{background:var(--violet-dim)}
-.sub-icon-mint{background:var(--mint-dim)}
-.sub-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--txt)}
-.sub-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)}
-.card{box-shadow:0 0 0 1px rgba(13,148,136,.06) inset}
-.card:hover{box-shadow:0 12px 40px rgba(13,148,136,.08),0 0 1px rgba(13,148,136,.2),0 0 30px rgba(13,148,136,.04)}
-.card[data-accent="sky"]::before{background:linear-gradient(90deg,#22D3EE,#14B8A6)}
-.hkpi{border-color:rgba(13,148,136,.15)}
-.hkpi:hover{border-color:rgba(13,148,136,.3);box-shadow:0 0 20px rgba(13,148,136,.1)}
-.bp-divider::before,.bp-divider::after{border-top-color:rgba(13,148,136,.15)}
-.bp-divider-circle{border-color:rgba(13,148,136,.2)}
-.att-item{border-color:rgba(13,148,136,.08)}
-.att-item:hover{border-color:rgba(13,148,136,.2);box-shadow:0 0 15px rgba(13,148,136,.06)}
-.trio-col{border-color:rgba(13,148,136,.1)}
-.ins-card{border-color:rgba(13,148,136,.1)}
-.ins-mini{border-color:rgba(13,148,136,.1)}
-.wom-item{border-color:rgba(13,148,136,.08)}
-.copa-banner{border-color:rgba(13,148,136,.2);background:linear-gradient(135deg,rgba(13,148,136,.08),rgba(52,211,153,.04),var(--card))}
-.sub-header{border-bottom-color:rgba(13,148,136,.12)}
-.sub-icon-sky{background:rgba(13,148,136,.12)}
-.hl-box{border-color:rgba(13,148,136,.1)}
-.season-banner{border-color:rgba(13,148,136,.15)}
-.nav-tabs{border-color:rgba(13,148,136,.12);background:rgba(13,148,136,.04)}
-.btn-ghost{border-color:rgba(13,148,136,.15)}
-.btn-ghost:hover{border-color:rgba(13,148,136,.3);box-shadow:0 0 12px rgba(13,148,136,.08)}
-.footer{border-top-color:rgba(13,148,136,.1)}
-.sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;background:rgba(8,8,15,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-right:1px solid rgba(13,148,136,.15);z-index:200;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding:20px 0}
-.sidebar.open{transform:translateX(0)}
-.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:199;opacity:0;pointer-events:none;transition:opacity .3s}
-.sidebar-overlay.open{opacity:1;pointer-events:auto}
-.sidebar-header{padding:16px 20px;border-bottom:1px solid rgba(13,148,136,.1);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
-.sidebar-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--txt)}
-.sidebar-close{background:none;border:none;color:var(--txt2);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:all .2s}
-.sidebar-close:hover{background:rgba(13,148,136,.12);color:var(--txt)}
-.sidebar-section{padding:8px 16px 4px;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3)}
-.sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .2s;border:none;background:none;width:100%;text-align:left;font-family:'Outfit',sans-serif}
-.sidebar-item:hover{background:rgba(13,148,136,.08);color:var(--txt)}
-.sidebar-item.active{background:rgba(13,148,136,.12);color:var(--violet);border-right:3px solid var(--violet)}
-.sidebar-icon{font-size:16px;width:24px;text-align:center;flex-shrink:0}
-.menu-btn{display:flex;align-items:center;gap:7px;padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(13,148,136,.2);background:rgba(13,148,136,.06);color:var(--txt2);font-family:'Outfit',sans-serif;transition:all .2s}
-.menu-btn:hover{background:rgba(13,148,136,.12);color:var(--txt);border-color:rgba(13,148,136,.3)}
-@media print{.sidebar,.sidebar-overlay,.menu-btn{display:none!important}}
-.masthead-tech-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.masthead-tech-bg svg{position:absolute;width:100%;height:100%;opacity:.04}
-.masthead-chip{position:absolute;border:1px solid rgba(13,148,136,.08);border-radius:4px}
-.masthead-chip::before{content:'';position:absolute;width:2px;background:rgba(13,148,136,.06);left:50%;transform:translateX(-50%)}
-.masthead-chip::after{content:'';position:absolute;height:2px;background:rgba(13,148,136,.06);top:50%;transform:translateY(-50%)}
-.masthead-glow-1{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.12),transparent 70%);top:-100px;right:-50px;pointer-events:none}
-.masthead-glow-2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.08),transparent 70%);bottom:-80px;left:10%;pointer-events:none}
-.masthead-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(13,148,136,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
-[data-theme="light"] .masthead{background:linear-gradient(160deg,#F0F0F8 0%,#E8E8F2 45%,#E0E0EE 100%);border-bottom-color:rgba(13,100,100,.1)}
-[data-theme="light"] .masthead::before{background:radial-gradient(ellipse at center bottom,rgba(13,148,136,.08) 0%,rgba(0,212,255,.05) 40%,transparent 70%)}
-[data-theme="light"] .masthead-grid{background-image:linear-gradient(rgba(13,100,100,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(13,100,100,.04) 1px,transparent 1px)}
-[data-theme="light"] .masthead-glow-1{background:radial-gradient(circle,rgba(13,148,136,.06),transparent 70%)}
-[data-theme="light"] .masthead-glow-2{background:radial-gradient(circle,rgba(0,212,255,.04),transparent 70%)}
-[data-theme="light"] .masthead-tech-bg svg line{stroke:rgba(13,100,100,.06)!important}
-[data-theme="light"] .masthead-tech-bg svg rect{stroke:rgba(13,100,100,.08)!important;fill:rgba(13,100,100,.02)!important}
-[data-theme="light"] .masthead-tech-bg svg circle{fill:rgba(13,100,100,.08)!important}
-[data-theme="light"] .brand-title{color:var(--txt)}
-[data-theme="light"] .brand-sub{color:var(--txt2)}
-[data-theme="light"] .eyebrow-text{color:#7C3AED}
-[data-theme="light"] .hkpi{background:rgba(255,255,255,.7);border-color:rgba(13,100,100,.12)}
-[data-theme="light"] .hkpi-label{color:var(--txt3)}
-[data-theme="light"] .hkpi-sub{color:var(--txt2)}
-[data-theme="light"] .controls{background:rgba(240,240,248,.92);border-bottom-color:rgba(13,100,100,.08)}
-[data-theme="light"] .menu-btn{background:rgba(13,100,100,.06);border-color:rgba(13,100,100,.12);color:var(--txt2)}
-[data-theme="light"] .menu-btn:hover{background:rgba(13,100,100,.1);color:var(--txt)}
-[data-theme="light"] .btn-ghost{background:rgba(13,100,100,.05);border-color:rgba(13,100,100,.12);color:var(--txt2)}
-[data-theme="light"] .btn-amber{background:linear-gradient(135deg,#0D9488,#14B8A6,#2DD4BF);color:#fff}
-.glossary{max-width:1280px;margin:0 auto;padding:0 52px 24px}
-.glossary-toggle{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
-.glossary-toggle:hover .glossary-title{color:var(--txt)}
-.glossary-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--txt2);transition:color .2s}
-.glossary-arrow{font-size:18px;color:var(--txt3);transition:transform .3s}
-.glossary-arrow.open{transform:rotate(180deg)}
-.glossary-content{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
-.glossary-content.open{max-height:3000px}
-.glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:20px 0}
-@media(max-width:700px){.glossary-grid{grid-template-columns:1fr}}
-.glossary-item{padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:border-color .2s}
-.glossary-item:hover{border-color:var(--border2)}
-.glossary-section-tag{display:inline-block;padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
-.glossary-term{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:4px}
-.glossary-def{font-size:11px;color:var(--txt2);line-height:1.6;font-weight:300}
-.glossary-source{display:flex;align-items:center;gap:8px;padding:16px 18px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;margin-bottom:8px}
-.glossary-source-icon{font-size:18px;flex-shrink:0}
-.glossary-source-info{flex:1}
-.glossary-source-name{font-size:12px;font-weight:700;color:var(--txt);margin-bottom:2px}
-.glossary-source-desc{font-size:10px;color:var(--txt3);line-height:1.5}
-.glossary-source-tag{padding:3px 10px;border-radius:100px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;flex-shrink:0}
-</style>
-</head>
-<body>
-<canvas id="bg-canvas"></canvas>
-<div class="page">
-<!-- MASTHEAD -->
-<header class="masthead">
-<div class="masthead-tech-bg">
-<div class="masthead-grid"></div>
-<div class="masthead-glow-1"></div>
-<div class="masthead-glow-2"></div>
-<svg viewBox="0 0 1280 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-<line x1="0" y1="80" x2="400" y2="80" stroke="rgba(13,148,136,.06)" stroke-width="1"/>
-<line x1="450" y1="80" x2="1280" y2="80" stroke="rgba(13,148,136,.04)" stroke-width="1" stroke-dasharray="8 4"/>
-<line x1="0" y1="160" x2="600" y2="160" stroke="rgba(20,184,166,.05)" stroke-width="1"/>
-<circle cx="400" cy="80" r="3" fill="rgba(13,148,136,.12)"/>
-<circle cx="600" cy="160" r="3" fill="rgba(20,184,166,.1)"/>
-<rect x="390" y="72" width="20" height="16" rx="3" stroke="rgba(13,148,136,.08)" fill="rgba(13,148,136,.02)" stroke-width="1"/>
-</svg>
-</div>
-<div class="masthead-inner">
-<div>
-<div class="eyebrow">
-<div class="eyebrow-line"></div>
-<span class="eyebrow-text">Comscore Plan Metrix · Agosto 2025</span>
-</div>
-<h1 class="brand-title">Defesa Comercial — Saúde</h1>
-<p class="brand-sub">Multi-Platform · Brasil · Total Audience · Estratégia de Dados</p>
-</div>
-<div class="header-kpis">
-<div class="hkpi"><div class="hkpi-label">Internet Total</div><div class="hkpi-val c-sky">117,3<span style="font-size:16px"> MM</span></div><div class="hkpi-sub">usuários únicos</div></div>
-<div class="hkpi"><div class="hkpi-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Terra_Logo.svg/500px-Terra_Logo.svg.png" class="hkpi-logo hkpi-logo-terra" crossorigin="anonymous" referrerpolicy="no-referrer"></div><div class="hkpi-val c-amber">59,0<span style="font-size:16px"> MM</span></div><div class="hkpi-sub">reach 50,4%</div></div>
-<div class="hkpi"><div class="hkpi-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Logo_VIVO.svg/960px-Logo_VIVO.svg.png" class="hkpi-logo hkpi-logo-vivo" crossorigin="anonymous" referrerpolicy="no-referrer"></div><div class="hkpi-val c-violet">21,9<span style="font-size:16px"> MM</span></div><div class="hkpi-sub">reach 18,6%</div></div>
-</div>
-</div>
-</header>
-<!-- Sidebar -->
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-<nav class="sidebar" id="sidebar">
-<div class="sidebar-header">
-<span class="sidebar-title">Navegação</span>
-<button class="sidebar-close" onclick="closeSidebar()">✕</button>
-</div>
-<div class="sidebar-section">Dados de Audiência</div>
-<button class="sidebar-item active" onclick="goTo(0)"><span class="sidebar-icon">🌐</span>Internet Total</button>
-<button class="sidebar-item" onclick="goTo('terra')"><span class="sidebar-icon">🟠</span>Terra</button>
-<button class="sidebar-item" onclick="goTo('vivo')"><span class="sidebar-icon">🟣</span>Vivo</button>
-<div class="sidebar-section">Análises</div>
-<button class="sidebar-item" onclick="goTo('farmacia')"><span class="sidebar-icon">💊</span>Farmácias & Medicamentos</button>
-<button class="sidebar-item" onclick="goTo('atitudes')"><span class="sidebar-icon">🧠</span>Atitudes & Bem-Estar</button>
-<button class="sidebar-item" onclick="goTo('dieta')"><span class="sidebar-icon">🥗</span>Dieta & Alimentação</button>
-<button class="sidebar-item" onclick="goTo('exercicio')"><span class="sidebar-icon">🏃</span>Exercício & Fitness</button>
-<div class="sidebar-section">Vivo Ads</div>
-<button class="sidebar-item" onclick="goTo('vivoads')"><span class="sidebar-icon">📡</span>Vivo Ads Saúde</button>
-</nav>
-<div class="controls">
-<button class="menu-btn" onclick="openSidebar()">☰ Menu</button>
-<div class="ctrl-btns">
-<button class="btn btn-ghost" onclick="toggleTheme()">☀ Tema</button>
-<button class="btn btn-amber" onclick="exportPDF()">📄 Exportar PDF</button>
-</div>
-</div>
-<div class="page">
-<!-- ═══ SEÇÃO 1 — INTERNET TOTAL ═══ -->
-<div class="section-wrap" id="top">
-<div class="sec-header"><div><h2 class="sec-title sec-title--internet">Internet Geral — Saúde & Bem-Estar</h2><p class="sec-desc">Base: 117,3 MM · Multi-Platform · Home & Work · Agosto 2025 · Segmento Saúde</p></div></div>
-<div class="grid g4 anim" style="margin-bottom:14px">
-<div class="card anim-d1" data-accent="sky" data-glow="sky"><div class="kpi-lbl">Usuários Únicos</div><div class="kpi-val c-sky">117,3 MM</div><div class="kpi-sub">Internet Brasil · Multi-Platform</div></div>
-<div class="card anim-d2" data-accent="sky"><div class="kpi-lbl">Compram em Farmácias</div><div class="kpi-val c-sky">52,5%</div><div class="kpi-sub">61,6 MM · compradores L12m</div></div>
-<div class="card anim-d3" data-accent="sky"><div class="kpi-lbl">Pagam por Saúde</div><div class="kpi-val c-sky">82,1%</div><div class="kpi-sub">96,3 MM · qualquer preço</div></div>
-<div class="card anim-d4" data-accent="mint"><div class="kpi-lbl">Manter a Forma</div><div class="kpi-val c-mint">82,6%</div><div class="kpi-sub">96,8 MM · consideram importante</div></div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-sky">🧠</div><div class="sub-title">Atitudes sobre Saúde & Cuidado Pessoal</div><div class="sub-line"></div></div>
-<div class="card anim" style="margin-bottom:14px">
-<div class="kpi-lbl" style="margin-bottom:18px">🧠 Atitudes sobre Saúde · % que concordam</div>
-<div class="att-grid">
-<div class="att-item"><div class="att-pct c-sky">82,1%</div><div class="att-txt">Pago qualquer coisa pela saúde<br><span class="att-count c-sky">96,3 MM</span></div></div>
-<div class="att-item"><div class="att-pct c-sky">82,6%</div><div class="att-txt">Importante manter a forma<br><span class="att-count c-sky">96,8 MM</span></div></div>
-<div class="att-item"><div class="att-pct c-sky">69,1%</div><div class="att-txt">Genéricos são tão bons quanto<br><span class="att-count c-sky">81,1 MM</span></div></div>
-<div class="att-item"><div class="att-pct c-sky">67,4%</div><div class="att-txt">Só vou ao médico se muito doente<br><span class="att-count c-sky">79,0 MM</span></div></div>
-<div class="att-item"><div class="att-pct c-sky">58,4%</div><div class="att-txt">Confio em homeopatia<br><span class="att-count c-sky">68,5 MM</span></div></div>
-<div class="att-item"><div class="att-pct c-sky">55,3%</div><div class="att-txt">Faço check-up mesmo bem<br><span class="att-count c-sky">64,9 MM</span></div></div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-sky">💊</div><div class="sub-title">Farmácias & Medicamentos</div><div class="sub-line"></div></div>
-<div class="grid g3 anim" style="margin-bottom:14px">
-<div class="card" data-accent="sky"><div class="kpi-lbl">Compraram em Farmácia (L12m)</div><div class="kpi-val c-sky">61,6 MM</div><div class="kpi-sub">Composição: 52,5% · Reach: —</div></div>
-<div class="card" data-accent="sky"><div class="kpi-lbl">Compram Remédios</div><div class="kpi-val c-sky">57,1 MM</div><div class="kpi-sub">Composição: 48,7% da internet</div></div>
-<div class="card" data-accent="sky"><div class="kpi-lbl">Gastam R$270+/mês</div><div class="kpi-val c-sky">15,5 MM</div><div class="kpi-sub">Composição: 13,2% · high-value</div></div>
-</div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">🏪 Redes de Farmácia — Preferência</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogasil</span><span class="bar-pct c-sky">20,8 MM · 17,8%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="100"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Farmácias Associadas</span><span class="bar-pct c-sky">18,3 MM · 15,6%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="88"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Pague Menos</span><span class="bar-pct c-sky">11,8 MM · 10,0%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="57"></div></div></div>
-</div>
-</div>
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">💰 Gasto Mensal em Farmácia (R$)</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">R$270+</span><span class="bar-pct c-sky">15,5 MM · 13,2%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="100"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">R$91–R$150</span><span class="bar-pct c-sky">10,5 MM · 9,0%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="68"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">R$31–R$90</span><span class="bar-pct c-sky">13,4 MM · 11,5%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="86"></div></div></div>
-</div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-mint">🩺</div><div class="sub-title">Medicamentos & Tratamentos</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">💊 Categorias de Medicamentos — Uso L12m</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Gripe / Tosse / Garganta</span><span class="bar-pct c-sky">54,5 MM · 46,5%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="100"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Analgésicos</span><span class="bar-pct c-sky">50,6 MM · 43,1%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="93"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dor Muscular</span><span class="bar-pct c-sky">31,9 MM · 27,2%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="59"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Repelente</span><span class="bar-pct c-mint">26,3 MM · 22,5%</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="48"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Vitaminas / Suplementos</span><span class="bar-pct c-mint">25,1 MM · 21,4%</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="46"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Estômago / Digestão</span><span class="bar-pct c-mint">18,3 MM · 15,6%</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="34"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Intestino</span><span class="bar-pct c-mint">15,1 MM · 12,9%</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="28"></div></div></div>
-</div>
-</div>
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">🏆 Marcas — Analgésicos & Dor Muscular</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dorflex (Total)</span><span class="bar-pct c-amber">22,7 MM · 19,4%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="100"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dorflex Comprimidos</span><span class="bar-pct c-amber">21,5 MM · 18,4%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="95"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Benegrip (Total)</span><span class="bar-pct c-amber">12,1 MM · 10,3%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="53"></div></div></div>
-</div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-sky">🥗</div><div class="sub-title">Dieta, Alimentação & Bem-Estar</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">🥗 Atitudes sobre Alimentação</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Pago mais por qualidade</span><span class="bar-pct c-mint">76,9% · 90,2 MM</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="77"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Gosto de experimentar</span><span class="bar-pct c-mint">60,4% · 70,8 MM</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="60"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta equilibrada</span><span class="bar-pct c-mint">52,1% · 61,0 MM</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="52"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Orgânico vale mais</span><span class="bar-pct c-mint">50,9% · 59,7 MM</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="51"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Conto calorias</span><span class="bar-pct c-sky">42,5% · 49,9 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="43"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Plant-based</span><span class="bar-pct c-sky">33,8% · 39,6 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="34"></div></div></div>
-</div>
-</div>
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">🏃 Exercício & Atividade Física</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Exercício 1x/semana</span><span class="bar-pct c-sky">51,0% · 59,8 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="51"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Me esforço pela forma</span><span class="bar-pct c-sky">47,1% · 55,2 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="47"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Preciso exercitar p/ me sentir bem</span><span class="bar-pct c-sky">45,3% · 53,1 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="45"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Não gosto mas sei que é saudável</span><span class="bar-pct c-amber">62,4% · 73,2 MM</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="62"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Falta disciplina</span><span class="bar-pct c-coral">44,5% · 52,2 MM</span></div><div class="bar-track"><div class="bar-fill bf-coral" data-w="45"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Tentando emagrecer</span><span class="bar-pct c-coral">42,3% · 49,6 MM</span></div><div class="bar-track"><div class="bar-fill bf-coral" data-w="42"></div></div></div>
-</div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-sky">📝</div><div class="sub-title">Insights Estratégicos — Internet Geral</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="ins-card" style="border-left-color:var(--sky)">
-<h4 style="color:var(--sky)">Saúde Não Tem Preço: 96,3 MM</h4>
-<p><strong>82,1% pagariam qualquer coisa pela saúde</strong> e <strong>82,6% consideram importante manter a forma</strong>. O brasileiro investe em saúde — mas <strong>67,4% só vão ao médico se muito doentes</strong>. O gap entre intenção e ação é a oportunidade: conteúdo educativo + farmácias digitais.</p>
-</div>
-<div class="ins-card" style="border-left-color:var(--mint)">
-<h4 style="color:var(--mint)">Farmácia é Hábito: 61,6 MM compradores</h4>
-<p><strong>52,5% compraram em farmácia nos últimos 12 meses</strong>. Drogasil lidera (20,8 MM), seguida por farmácias associadas (18,3 MM). <strong>48,7% compram remédios</strong> e <strong>13,2% gastam R$270+/mês</strong> — audiência high-value para saúde.</p>
-</div>
-</div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="ins-card" style="border-left-color:var(--amber)">
-<h4 style="color:var(--amber)">Dorflex: a Marca da Dor Brasileira</h4>
-<p>Dorflex alcança <strong>22,7 MM (19,4%)</strong> — a marca de analgésico mais usada do país. <strong>54,5 MM usaram remédio para gripe</strong> (46,5%) e <strong>31,9 MM para dor muscular</strong> (27,2%). O brasileiro se automedica — e busca informação online.</p>
-</div>
-<div class="ins-card" style="border-left-color:var(--coral)">
-<h4 style="color:var(--coral)">Dieta & Fitness: Intenção vs Realidade</h4>
-<p><strong>33,1% controlam dieta</strong> (38,9 MM) — maioria para emagrecer (21,7%). Mas <strong>44,5% admitem falta de disciplina</strong> e <strong>62,4% não gostam mas sabem que exercício é saudável</strong>. O mercado de wellness cresce no gap entre desejo e execução.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="bp-divider" id="terra"><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div></div>
-<!-- ═══ SEÇÃO 2 — TERRA ═══ -->
-<div class="section-wrap">
-<div class="sec-header"><div><h2 class="sec-title sec-title--terra"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Terra_Logo.svg/500px-Terra_Logo.svg.png" class="sec-logo sec-logo-terra" crossorigin="anonymous" referrerpolicy="no-referrer">| Dados de Audiência Saúde</h2><p class="sec-desc">Perfil da audiência Terra no segmento Saúde & Bem-Estar · Agosto 2025</p></div></div>
-<div class="grid g4 anim" style="margin-bottom:14px">
-<div class="card anim-d1" data-accent="amber" data-glow="amber"><div class="kpi-lbl">Usuários Terra</div><div class="kpi-val c-amber">59,0 MM</div><div class="kpi-sub">Reach 50,4% da internet</div></div>
-<div class="card anim-d2" data-accent="amber"><div class="kpi-lbl">Farmácia (compradores)</div><div class="kpi-val c-amber">R 52,9%</div><div class="kpi-sub">32,6 MM alcançáveis</div></div>
-<div class="card anim-d3" data-accent="amber"><div class="kpi-lbl">Dor Muscular (usuários)</div><div class="kpi-val c-amber">R 55,0%</div><div class="kpi-sub">17,5 MM · acima da média</div></div>
-<div class="card anim-d4" data-accent="mint"><div class="kpi-lbl">Homeopatia (confiam)</div><div class="kpi-val c-mint">R 53,6%</div><div class="kpi-sub">36,7 MM · sobre-representado</div></div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-amber">🧠</div><div class="sub-title">Atitudes Saúde — Composição & Reach Terra</div><div class="sub-line"></div></div>
-<div class="card anim" style="margin-bottom:14px">
-<div class="kpi-lbl" style="margin-bottom:18px">🧠 Atitudes Saúde · Terra · Comp% e Reach</div>
-<div class="att-grid">
-<div class="att-item"><div class="att-pct c-amber">83,8%</div><div class="att-txt">Pago qualquer coisa pela saúde<br><span class="att-count c-amber">C 83,8% · R 51,4%</span></div></div>
-<div class="att-item"><div class="att-pct c-amber">83,2%</div><div class="att-txt">Importante manter a forma<br><span class="att-count c-amber">C 83,2% · R 50,7%</span></div></div>
-<div class="att-item"><div class="att-pct c-amber">71,3%</div><div class="att-txt">Genéricos são eficazes<br><span class="att-count c-amber">C 71,3% · R 51,9%</span></div></div>
-<div class="att-item"><div class="att-pct c-amber">62,2%</div><div class="att-txt">Confio em homeopatia<br><span class="att-count c-amber">C 62,2% · R 53,6%</span></div></div>
-<div class="att-item"><div class="att-pct c-amber">58,6%</div><div class="att-txt">Faço check-up preventivo<br><span class="att-count c-amber">C 58,6% · R 53,4%</span></div></div>
-<div class="att-item"><div class="att-pct c-amber">54,8%</div><div class="att-txt">Como e bebo de forma saudável<br><span class="att-count c-amber">C 54,8% · R 53,9%</span></div></div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-amber">💊</div><div class="sub-title">Farmácias & Medicamentos — Reach Terra</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">🏪 Farmácias — Reach Terra</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Farmácias Associadas</span><span class="bar-pct c-amber">R 56,6%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="56.6"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Pague Menos</span><span class="bar-pct c-amber">R 56,2%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="56.2"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogasil</span><span class="bar-pct c-amber">R 54,6%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="54.6"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogaria São Paulo</span><span class="bar-pct c-amber">R 48,8%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="48.8"></div></div></div>
-</div>
-</div>
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">💊 Medicamentos — Reach Terra</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dorflex (dor muscular)</span><span class="bar-pct c-amber">R 55,5%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="55.5"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Neocoflan</span><span class="bar-pct c-amber">R 60,1%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="60.1"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Compram Remédios</span><span class="bar-pct c-amber">R 53,7%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="53.7"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Benegrip (gripe)</span><span class="bar-pct c-amber">R 51,7%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="51.7"></div></div></div>
-</div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-amber">🥗</div><div class="sub-title">Dieta & Exercício — Terra</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">🥗 Dieta & Alimentação · Terra</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Controlam dieta</span><span class="bar-pct c-amber">C 34,2% · R 52,0%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="52"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta p/ emagrecer</span><span class="bar-pct c-amber">C 22,8% · R 53,1%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="53.1"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta +3 anos</span><span class="bar-pct c-amber">C 11,0% · R 59,6%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="59.6"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta equilibrada</span><span class="bar-pct c-amber">C 54,5% · R 52,7%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="52.7"></div></div></div>
-</div>
-</div>
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">🏃 Exercício · Terra</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Exercício 1x/semana</span><span class="bar-pct c-amber">C 48,3% · R 47,7%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="47.7"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Esforço pela forma</span><span class="bar-pct c-amber">C 49,0% · R 52,4%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="52.4"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Come saudável sempre</span><span class="bar-pct c-amber">C 54,8% · R 53,9%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="53.9"></div></div></div>
-</div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-amber">📝</div><div class="sub-title">Insights Estratégicos — Terra</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="ins-card" style="border-left-color:var(--amber)">
-<h4 style="color:var(--amber)">Terra: O Canal do Cuidado Preventivo</h4>
-<p>O Terra alcança <strong>R 53,4% de quem faz check-up preventivo</strong> e <strong>R 53,9% de quem come saudável sempre</strong>. Audiência 45+ com R 65,7% — o perfil que mais gasta em farmácia. <strong>Conteúdo de wellness e prevenção</strong> gera conversão editorial direta.</p>
-</div>
-<div class="ins-card" style="border-left-color:var(--amber)">
-<h4 style="color:var(--amber)">Dor Muscular: R 55-60% no Terra</h4>
-<p>Dorflex alcança <strong>R 55,5%</strong> e Neocoflan <strong>R 60,1%</strong> no Terra — acima da média. Farmácias associadas com <strong>R 56,6%</strong>. O Terra é o canal ideal para campanhas de <strong>OTC, dor e autocuidado</strong>.</p>
-</div>
-</div>
-</div>
-<div class="bp-divider" id="vivo"><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div></div>
-<!-- ═══ SEÇÃO 3 — VIVO ═══ -->
-<div class="section-wrap">
-<div class="sec-header"><div><h2 class="sec-title sec-title--vivo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Logo_VIVO.svg/960px-Logo_VIVO.svg.png" class="sec-logo sec-logo-vivo" crossorigin="anonymous" referrerpolicy="no-referrer">| Dados de Audiência Saúde</h2><p class="sec-desc">Base Vivo no segmento Saúde & Bem-Estar · Agosto 2025</p></div></div>
-<div class="grid g4 anim" style="margin-bottom:14px">
-<div class="card anim-d1" data-accent="violet" data-glow="violet"><div class="kpi-lbl">Base Vivo</div><div class="kpi-val c-violet">21,9 MM</div><div class="kpi-sub">Reach 18,6%</div></div>
-<div class="card anim-d2" data-accent="violet"><div class="kpi-lbl">Farmácia (compradores)</div><div class="kpi-val c-violet">R 20,2%</div><div class="kpi-sub">12,4 MM · sobre-representado</div></div>
-<div class="card anim-d3" data-accent="violet"><div class="kpi-lbl">Controlam Dieta</div><div class="kpi-val c-violet">R 20,7%</div><div class="kpi-sub">8,1 MM · acima da média</div></div>
-<div class="card anim-d4" data-accent="coral"><div class="kpi-lbl">SUS (usam apenas)</div><div class="kpi-val c-coral">R 20,4%</div><div class="kpi-sub">14,2 MM · perfil popular</div></div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-violet">🧠</div><div class="sub-title">Atitudes Saúde — Composição & Reach Vivo</div><div class="sub-line"></div></div>
-<div class="card anim" style="margin-bottom:14px">
-<div class="kpi-lbl" style="margin-bottom:18px">🧠 Atitudes Saúde · Vivo · Comp% e Reach</div>
-<div class="att-grid">
-<div class="att-item"><div class="att-pct c-violet">85,9%</div><div class="att-txt">Pago qualquer coisa pela saúde<br><span class="att-count c-violet">C 85,9% · R 19,5%</span></div></div>
-<div class="att-item"><div class="att-pct c-violet">69,7%</div><div class="att-txt">Só vou ao médico se muito doente<br><span class="att-count c-violet">C 69,7% · R 19,3%</span></div></div>
-<div class="att-item"><div class="att-pct c-violet">65,0%</div><div class="att-txt">Uso apenas SUS<br><span class="att-count c-violet">C 65,0% · R 20,4%</span></div></div>
-<div class="att-item"><div class="att-pct c-violet">60,9%</div><div class="att-txt">Confio em homeopatia<br><span class="att-count c-violet">C 60,9% · R 19,4%</span></div></div>
-<div class="att-item"><div class="att-pct c-violet">56,0%</div><div class="att-txt">Dieta equilibrada<br><span class="att-count c-violet">C 56,0% · R 20,1%</span></div></div>
-<div class="att-item"><div class="att-pct c-violet">49,3%</div><div class="att-txt">Exercício 1x/semana<br><span class="att-count c-violet">C 49,3% · R 18,0%</span></div></div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-violet">💊</div><div class="sub-title">Farmácias & Medicamentos — Reach Vivo</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">🏪 Farmácias — Reach Vivo</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Farmácias Associadas</span><span class="bar-pct c-violet">R 21,3%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="21.3"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Frequência mensal</span><span class="bar-pct c-violet">R 21,9%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="21.9"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Compram remédios</span><span class="bar-pct c-violet">R 20,5%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="20.5"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogasil</span><span class="bar-pct c-violet">R 19,0%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="19"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogaria São Paulo</span><span class="bar-pct c-violet">R 20,1%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="20.1"></div></div></div>
-</div>
-</div>
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">💊 Medicamentos — Reach Vivo</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dor muscular (usuários)</span><span class="bar-pct c-violet">R 20,6%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="20.6"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dorflex comprimidos</span><span class="bar-pct c-violet">R 19,8%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="19.8"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Neocoflan</span><span class="bar-pct c-violet">R 23,7%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="23.7"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Repelente (usuários)</span><span class="bar-pct c-violet">R 19,6%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="19.6"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta p/ emagrecer</span><span class="bar-pct c-violet">R 20,8%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="20.8"></div></div></div>
-</div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-violet">📝</div><div class="sub-title">Insights Estratégicos — Vivo</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="ins-card" style="border-left-color:var(--violet)">
-<h4 style="color:var(--violet)">Vivo: Canal do Consumidor de Saúde Popular</h4>
-<p>A base Vivo tem <strong>65% usando apenas SUS</strong> (R 20,4%) e <strong>69,7% só vão ao médico se muito doentes</strong>. É o perfil que mais precisa de <strong>conteúdo educativo sobre prevenção</strong> e ofertas acessíveis de farmácia. Push com cupons de desconto em OTC é ouro.</p>
-</div>
-<div class="ins-card" style="border-left-color:var(--coral)">
-<h4 style="color:var(--coral)">Dieta & Emagrecimento: R 20,7-20,8%</h4>
-<p><strong>36,8% da base Vivo controlam dieta</strong> (acima dos 33,1% da internet) e <strong>R 20,8% nos que fazem dieta para emagrecer</strong>. Canal ideal para apps de nutrição, suplementos e programas de emagrecimento com <strong>preço acessível</strong>.</p>
-</div>
-</div>
-</div>
-
-<div class="bp-divider" id="vivoads"><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div></div>
-<!-- ═══ VIVO ADS — SAÚDE ═══ -->
-<div class="section-wrap">
-<div class="sec-header"><div><h2 class="sec-title sec-title--vivo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Logo_VIVO.svg/960px-Logo_VIVO.svg.png" class="sec-logo sec-logo-vivo" crossorigin="anonymous" referrerpolicy="no-referrer">Vivo Ads · Dados First-Party Saúde</h2><p class="sec-desc">Audiências first-party Vivo Ads no segmento Saúde & Bem-Estar. Share % dentro de cada categoria.</p></div></div>
-<div class="grid g4 anim" style="margin-bottom:14px">
-<div class="card" data-accent="violet" data-glow="violet"><div class="kpi-lbl">Beleza</div><div class="kpi-val c-violet">5,8 MM</div><div class="kpi-sub">apps de beleza e cuidados</div></div>
-<div class="card" data-accent="violet"><div class="kpi-lbl">Farmácia</div><div class="kpi-val c-violet">4,3 MM</div><div class="kpi-sub">apps de farmácia e saúde</div></div>
-<div class="card" data-accent="violet"><div class="kpi-lbl">Atividade Física</div><div class="kpi-val c-violet">3,7 MM</div><div class="kpi-sub">apps de exercício e fitness</div></div>
-<div class="card" data-accent="sky"><div class="kpi-lbl">Plano de Saúde</div><div class="kpi-val c-sky">2,1 MM</div><div class="kpi-sub">apps de planos de saúde</div></div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-violet">💊</div><div class="sub-title">Ecossistema Saúde na Base Vivo — Categorias</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">💊 Saúde & Bem-Estar — Volume por Categoria</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Beleza</span><span class="bar-pct c-violet">5,8 MM</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="100"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Farmácia</span><span class="bar-pct c-violet">4,3 MM</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="74"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Atividade Física</span><span class="bar-pct c-violet">3,7 MM</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="64"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Plano de Saúde</span><span class="bar-pct c-sky">2,1 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="36"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Plano Tradicional</span><span class="bar-pct c-sky">1,7 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="29"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Nutrição / Dieta</span><span class="bar-pct c-sky">436K</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="8"></div></div></div>
-</div>
-</div>
-<div class="card">
-<div class="kpi-lbl" style="margin-bottom:16px">🧘 Wellness & Profissionais</div>
-<div class="bars">
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Profissionais Saúde</span><span class="bar-pct c-violet">283K</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="100"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Meditação</span><span class="bar-pct c-violet">222K</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="79"></div></div></div>
-<div class="bar-item"><div class="bar-row"><span class="bar-lbl">Startups de Saúde</span><span class="bar-pct c-sky">212K</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="75"></div></div></div>
-</div>
-</div>
-</div>
-<div class="sub-header"><div class="sub-icon sub-icon-violet">📝</div><div class="sub-title">Insights — Vivo Ads Saúde</div><div class="sub-line"></div></div>
-<div class="grid g2 anim" style="margin-bottom:14px">
-<div class="ins-card" style="border-left-color:var(--violet)">
-<h4 style="color:var(--violet)">Beleza Lidera o Ecossistema Saúde</h4>
-<p>Com <strong>5,8 MM de usuários</strong>, apps de beleza superam farmácia (4,3 MM) e atividade física (3,7 MM). O cuidado pessoal é porta de entrada para o universo saúde — campanhas de skincare, maquiagem e wellness encontram audiência massiva.</p>
-</div>
-<div class="ins-card" style="border-left-color:var(--violet)">
-<h4 style="color:var(--violet)">Planos de Saúde: 2,1 MM Ativáveis</h4>
-<p><strong>2,1 MM usam apps de planos de saúde</strong> + 1,7 MM planos tradicionais. Audiência premium com alto LTV. Push contextual para <strong>check-up, agendamento e upgrade de plano</strong> em momentos de necessidade.</p>
-</div>
-</div>
-</div>
-<!-- FOOTER -->
-<footer class="footer">
-<div class="footer-copy"><strong>©2026 Comscore, Inc.</strong> · Plan Metrix Audience Profile · Agosto 2025<br>Multi-Platform · Brasil · Total Audience · Segmento Saúde & Bem-Estar</div>
-</footer>
-<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">↑</button>
-</div>
-<script>
-const scrollTopBtn=document.getElementById('scroll-top');
-window.addEventListener('scroll',()=>{scrollTopBtn.classList.toggle('visible',window.scrollY>400)},{passive:true});
-function toggleTheme(){document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark'}
-function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('open')}
-function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open')}
-function goTo(id){closeSidebar();setTimeout(()=>{if(id===0){window.scrollTo({top:0,behavior:'smooth'});return}const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},200);document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));event.target.closest('.sidebar-item').classList.add('active')}
-function exportPDF(){window.print()}
-const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('vis');e.target.querySelectorAll('.bar-fill[data-w]').forEach(f=>{f.style.width=f.dataset.w+'%';f.removeAttribute('data-w')});io.unobserve(e.target)})},{threshold:0.08});
-document.querySelectorAll('.anim,.card,.trio-col').forEach(el=>{if(!el.classList.contains('anim'))el.classList.add('anim');io.observe(el)});
-(function(){const c=document.getElementById('bg-canvas'),x=c.getContext('2d');const t=['DNA','RNA','💊','🩺','♥','O₂','H₂O','pH','BMI','ECG','SPF','UV','IMC','Rx','SUS'];let cells=[];function build(){cells=[];const W=c.width,H=c.height;const cW=200,rH=60,cols=Math.ceil(W/cW)+1,rows=Math.ceil(H/rH)+1;for(let r=0;r<rows;r++)for(let cl=0;cl<cols;cl++){cells.push({x:cl*cW+(r%2)*cW*.5+(Math.random()-.5)*28,y:r*rH+(Math.random()-.5)*14,t:t[Math.floor(Math.random()*t.length)],s:10+Math.floor(Math.random()*3),a:.028+Math.random()*.022})}}function draw(){x.clearRect(0,0,c.width,c.height);const d=document.documentElement.dataset.theme!=='light';cells.forEach(cl=>{x.font=`400 ${cl.s}px 'Space Mono',monospace`;x.fillStyle=d?`rgba(13,148,136,${cl.a})`:`rgba(13,100,100,${cl.a*1.4})`;x.fillText(cl.t,cl.x,cl.y)})}function resize(){c.width=window.innerWidth;c.height=Math.max(document.body.scrollHeight,window.innerHeight);build();draw()}document.fonts.load("400 12px 'Space Mono'").then(resize).catch(resize);new MutationObserver(()=>draw()).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});let raf;window.addEventListener('resize',()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(resize)});let lH=0;setInterval(()=>{const h=Math.max(document.body.scrollHeight,window.innerHeight);if(h!==lH){lH=h;resize()}},900)})();
-</script>
-</body>
-</html>
+<!DOCTYPE html>  
+<html lang="pt-BR" data-theme="dark">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Tecnologia · Terra & Vivo Ads · Comscore Plan Metrix · Ago 2025</title>  
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">  
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  
+<style>  
+:root{--sky:#14B8A6;--sky2:#5EEAD4;--amber:#F59E0B;--amber2:#FCD34D;--coral:#F87171;--violet:#0D9488;--mint:#34D399;--white:#F0F0FF;--sky-dim:rgba(34,211,238,.1);--amber-dim:rgba(13,148,136,.1);--coral-dim:rgba(248,113,113,.1);--violet-dim:rgba(13,148,136,.12);--mint-dim:rgba(52,211,153,.1);--neon:#2DD4BF;--neon2:#99F6E4}  
+[data-theme="dark"]{--bg:#020F0F;--bg2:#041A1A;--bg3:#062626;--bg4:#0A3333;--border:rgba(13,148,136,.12);--border2:rgba(13,148,136,.22);--txt:#EDEDFF;--txt2:#9CA3C0;--txt3:#5B5F80;--card:rgba(13,148,136,.04);--card-h:rgba(13,148,136,.08)}  
+[data-theme="light"]{--bg:#F0FAF9;--bg2:#E4F5F4;--bg3:#D8EFED;--bg4:#CCE8E5;--border:rgba(13,100,100,.1);--border2:rgba(13,100,100,.18);--txt:#0F0F2E;--txt2:#4A4A70;--txt3:#7B7BA0;--card:rgba(255,255,255,.80);--card-h:rgba(255,255,255,.95)}  
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}  
+html{scroll-behavior:smooth}  
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;transition:background .35s,color .35s}  
+#bg-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}  
+.masthead{position:relative;background:linear-gradient(160deg,#021A1A 0%,#042F2E 45%,#064E3B 100%);border-bottom:1px solid var(--border2);overflow:hidden;z-index:10}  
+.masthead::before{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:90%;height:180px;background:radial-gradient(ellipse at center bottom,rgba(13,148,136,.3) 0%,rgba(192,132,252,.15) 40%,transparent 70%);pointer-events:none}  
+.masthead-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:44px 52px 52px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}  
+.eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:12px}  
+.eyebrow-line{width:28px;height:2px;background:linear-gradient(90deg,var(--violet),var(--neon));border-radius:2px}  
+.eyebrow-text{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--neon)}  
+.brand-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5.5vw,64px);font-weight:700;line-height:1.05;color:var(--white);margin-bottom:8px}  
+.brand-title span{display:block;font-style:italic;background:linear-gradient(100deg,var(--violet) 0%,var(--neon) 50%,var(--sky) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}  
+.brand-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);letter-spacing:.02em}  
+.header-kpis{display:flex;gap:20px;align-items:stretch;flex-wrap:wrap}  
+.hkpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 22px;min-width:130px;backdrop-filter:blur(12px);transition:background .2s}  
+.hkpi:hover{background:rgba(255,255,255,.09)}  
+.hkpi-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}  
+.hkpi-val{font-family:'Nunito',sans-serif;font-size:28px;font-weight:800;line-height:1}  
+.hkpi-sub{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px}  
+.hkpi-logo{display:block;height:22px;width:auto;margin:0 auto 2px;object-fit:contain}  
+.hkpi-logo-terra{filter:none}  
+.hkpi-logo-vivo{filter:brightness(0) invert(1)}  
+[data-theme="light"] .hkpi-logo-vivo{filter:none}  
+.controls{max-width:1280px;margin:0 auto;padding:10px 52px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(8,8,15,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100}  
+@media(max-width:640px){.controls{padding:10px 20px}}  
+.nav-tabs{display:flex;gap:3px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:4px}  
+.nav-tab{padding:7px 16px;border-radius:10px;font-size:12px;font-weight:600;color:var(--txt2);background:transparent;border:none;cursor:pointer;transition:all .22s;font-family:'Outfit',sans-serif;letter-spacing:.01em;display:flex;align-items:center;gap:5px;white-space:nowrap}  
+.nav-tab:hover{color:var(--txt);background:rgba(255,255,255,.07)}  
+.nav-tab.active{background:linear-gradient(135deg,rgba(13,148,136,.2),rgba(13,148,136,.08));color:var(--violet);border:1px solid rgba(13,148,136,.3);box-shadow:0 0 14px rgba(13,148,136,.15),inset 0 1px 0 rgba(13,148,136,.12)}  
+.ctrl-btns{display:flex;gap:8px;align-items:center}  
+.btn{display:flex;align-items:center;gap:7px;padding:8px 18px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all .22s;font-family:'Outfit',sans-serif;letter-spacing:.02em}  
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--txt2);border:1px solid var(--border2);backdrop-filter:blur(8px)}  
+.btn-ghost:hover{background:rgba(255,255,255,.10);color:var(--txt);border-color:rgba(255,255,255,.2);transform:translateY(-1px)}  
+.btn-amber{background:linear-gradient(135deg,#0D9488 0%,#14B8A6 50%,#2DD4BF 100%);color:#fff;font-weight:800;box-shadow:0 4px 18px rgba(13,148,136,.4);border:1px solid rgba(13,148,136,.5)}  
+.btn-amber:hover{box-shadow:0 6px 28px rgba(13,148,136,.5);transform:translateY(-2px)}  
+.page{position:relative;z-index:1}  
+.section-wrap{max-width:1280px;margin:0 auto;padding:52px 52px 24px}  
+@media(max-width:700px){.section-wrap{padding:36px 20px 20px}}  
+.bp-divider{max-width:1280px;margin:0 auto;padding:0 52px;display:flex;align-items:center;gap:0;position:relative}  
+.bp-divider::before,.bp-divider::after{content:'';flex:1;border-top:2px dashed var(--border2)}  
+.bp-divider-circle{width:20px;height:20px;border-radius:50%;background:var(--bg);border:2px solid var(--border2);flex-shrink:0;margin:8px}  
+.sec-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:32px;flex-wrap:wrap}  
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.2vw,38px);font-weight:700;line-height:1.15;margin-bottom:6px;position:relative;display:inline-block}  
+.sec-title--internet{background:linear-gradient(120deg,#22D3EE 0%,#14B8A6 50%,#2DD4BF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 18px rgba(13,148,136,.35))}  
+.sec-title--terra{background:linear-gradient(120deg,#F59E0B 0%,#FBBF24 50%,#FDE68A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 18px rgba(13,148,136,.28))}  
+.sec-title--vivo{background:linear-gradient(120deg,#A78BFA 0%,#C4B5FD 50%,#DDD6FE 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 18px rgba(167,139,250,.28))}  
+.sec-title--comp{background:linear-gradient(120deg,#F59E0B 0%,#2DD4BF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}  
+.sec-title--copa{background:linear-gradient(120deg,#34D399 0%,#14B8A6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}  
+.sec-desc{font-size:13px;color:var(--txt2);line-height:1.75;max-width:600px;font-weight:300}  
+.sec-logo{height:28px;width:auto;object-fit:contain;vertical-align:middle;margin-right:10px;position:relative;top:-2px}  
+.sec-logo-terra{filter:none}  
+.sec-logo-vivo{filter:brightness(0) invert(1) drop-shadow(0 0 4px rgba(167,139,250,.6))}  
+[data-theme="light"] .sec-logo-vivo{filter:none}  
+.grid{display:grid;gap:14px}  
+.g2{grid-template-columns:1fr 1fr}  
+.g3{grid-template-columns:1fr 1fr 1fr}  
+.g4{grid-template-columns:repeat(4,1fr)}  
+@media(max-width:960px){.g2,.g3,.g4{grid-template-columns:1fr 1fr}}  
+@media(max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}}  
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:background .2s,border-color .2s,transform .2s,box-shadow .2s}  
+.card:hover{background:var(--card-h);border-color:var(--border2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(13,148,136,.12),0 0 1px rgba(13,148,136,.3)}  
+.card[data-accent]::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0}  
+.card[data-accent="sky"]::before{background:linear-gradient(90deg,var(--sky),var(--sky2))}  
+.card[data-accent="amber"]::before{background:linear-gradient(90deg,var(--amber),var(--amber2))}  
+.card[data-accent="violet"]::before{background:linear-gradient(90deg,var(--violet),#C4B5FD)}  
+.card[data-accent="mint"]::before{background:linear-gradient(90deg,var(--mint),#6EE7B7)}  
+.card[data-accent="coral"]::before{background:linear-gradient(90deg,var(--coral),#FCA5A5)}  
+.card[data-glow]::after{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;filter:blur(45px);opacity:.25;pointer-events:none}  
+.card[data-glow="sky"]::after{background:var(--sky)}  
+.card[data-glow="amber"]::after{background:var(--amber)}  
+.card[data-glow="violet"]::after{background:var(--violet)}  
+.kpi-lbl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-bottom:10px}  
+.kpi-val{font-family:'Nunito',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1;margin-bottom:4px}  
+.kpi-sub{font-size:12px;color:var(--txt2);font-weight:300}  
+.c-sky{color:var(--sky)}.c-amber{color:var(--amber)}.c-coral{color:var(--coral)}.c-violet{color:var(--violet)}.c-mint{color:var(--mint)}.c-amber2{color:var(--neon)}  
+.bars{display:flex;flex-direction:column;gap:11px}  
+.bar-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}  
+.bar-lbl{font-size:12px;color:var(--txt2);flex:1}  
+.bar-pct{font-size:12px;font-weight:700;white-space:nowrap}  
+.bar-track{height:5px;border-radius:3px;background:var(--bg4);overflow:hidden}  
+.bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.3s cubic-bezier(.16,1,.3,1)}  
+.bf-sky{background:linear-gradient(90deg,var(--sky),rgba(34,211,238,.3))}  
+.bf-amber{background:linear-gradient(90deg,var(--amber),rgba(13,148,136,.4))}  
+.bf-violet{background:linear-gradient(90deg,var(--violet),rgba(13,148,136,.3))}  
+.bf-mint{background:linear-gradient(90deg,var(--mint),rgba(52,211,153,.4))}  
+.bf-coral{background:linear-gradient(90deg,var(--coral),rgba(248,113,113,.4))}  
+.stat-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}  
+.stat-row:last-child{border-bottom:none}  
+.stat-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}  
+.stat-info{flex:1}  
+.stat-name{font-size:13px;margin-bottom:1px}  
+.stat-num{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;white-space:nowrap}  
+.att-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}  
+@media(max-width:560px){.att-grid{grid-template-columns:1fr}}  
+.att-item{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;align-items:flex-start;gap:12px;transition:border-color .2s}  
+.att-item:hover{border-color:var(--border2)}  
+.att-pct{font-family:'Nunito',sans-serif;font-size:28px;font-weight:800;line-height:1;flex-shrink:0}  
+.att-txt{font-size:12px;color:var(--txt2);line-height:1.55;padding-top:3px}  
+.att-count{font-size:11px;font-weight:600;margin-top:4px}  
+.trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}  
+@media(max-width:720px){.trio{grid-template-columns:1fr}}  
+.trio-col{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;border-top:3px solid}  
+.trio-head{display:flex;align-items:center;gap:8px;margin-bottom:18px}  
+.trio-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}  
+.trio-name{font-size:11px;font-weight:700;letter-spacing:.10em;text-transform:uppercase}  
+.trio-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--txt2)}  
+.trio-row:last-child{border-bottom:none}  
+.trio-v{font-weight:700;color:var(--txt);font-size:13px}  
+.hl-box{display:flex;align-items:flex-start;gap:12px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px}  
+.hl-icon{font-size:22px;flex-shrink:0;margin-top:1px}  
+.hl-txt{font-size:13px;color:var(--txt2);line-height:1.65;font-weight:300}  
+.hl-txt strong{color:var(--txt);font-weight:600}  
+.season-banner{position:relative;background:linear-gradient(135deg,rgba(var(--sb-clr),.08) 0%,rgba(var(--sb-clr),.03) 50%,var(--card) 100%);border:1px solid rgba(var(--sb-clr),.2);border-radius:20px;padding:28px;overflow:hidden}  
+.sb-pseudo-bg{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:88px;opacity:.06;pointer-events:none;line-height:1}  
+.sb-head{margin-bottom:20px}  
+.sb-eyebrow{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3);margin-bottom:6px}  
+.sb-title{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}  
+.sb-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:20px}  
+@media(max-width:860px){.sb-kpis{grid-template-columns:1fr 1fr}}  
+.sb-kpi-lbl{font-size:10px;font-weight:600;letter-spacing:.10em;text-transform:uppercase;color:var(--txt3);margin-bottom:6px}  
+.sb-kpi-val{font-family:'Nunito',sans-serif;font-size:32px;font-weight:800;line-height:1;margin-bottom:3px}  
+.sb-kpi-sub{font-size:11px;color:var(--txt2);font-weight:300}  
+.sb-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}  
+@media(max-width:860px){.sb-boxes{grid-template-columns:1fr}}  
+.wom-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}  
+@media(max-width:600px){.wom-row{grid-template-columns:1fr 1fr}}  
+.wom-item{padding:18px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:14px}  
+.wom-val{font-family:'Nunito',sans-serif;font-size:30px;font-weight:800;line-height:1;margin-bottom:4px}  
+.wom-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.10em;color:var(--txt3);margin-bottom:2px}  
+.wom-n{font-size:12px;color:var(--txt2);font-weight:300}  
+.tag{display:inline-flex;align-items:center;padding:4px 11px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid}  
+.tag-sky{background:var(--sky-dim);color:var(--sky);border-color:rgba(0,212,255,.25)}  
+.tag-amber{background:var(--amber-dim);color:var(--amber);border-color:rgba(13,148,136,.25)}  
+.tag-violet{background:var(--violet-dim);color:var(--violet);border-color:rgba(167,139,250,.25)}  
+.tag-mint{background:var(--mint-dim);color:var(--mint);border-color:rgba(52,211,153,.25)}  
+.anim{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}  
+.anim.vis{opacity:1;transform:translateY(0)}  
+.anim-d1{transition-delay:.05s}.anim-d2{transition-delay:.12s}.anim-d3{transition-delay:.19s}.anim-d4{transition-delay:.26s}  
+.footer{position:relative;z-index:1;max-width:1280px;margin:24px auto 0;padding:24px 52px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}  
+.footer-copy{font-size:11px;color:var(--txt3);font-weight:300;line-height:1.8}  
+.footer-copy strong{color:var(--txt2);font-weight:600}  
+#scroll-top{position:fixed;bottom:36px;right:36px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#14B8A6);color:#fff;font-size:20px;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(13,148,136,.35);opacity:0;transform:translateY(12px) scale(.85);transition:opacity .3s,transform .3s;pointer-events:none;z-index:999}  
+#scroll-top.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}  
+#scroll-top:hover{background:linear-gradient(135deg,#7DD3FC,var(--sky));box-shadow:0 6px 28px rgba(13,148,136,.5);transform:translateY(-2px) scale(1.05)}  
+.brand-logo-icon{width:28px;height:28px;object-fit:contain;display:block;flex-shrink:0}  
+.brand-logo-nav{width:14px;height:14px;object-fit:contain;display:inline-block;vertical-align:middle;margin-right:4px;position:relative;top:-1px}  
+.brand-logo-terra{border-radius:4px}  
+.brand-logo-vivo{filter:brightness(0) invert(1) drop-shadow(0 0 3px rgba(167,139,250,.5))}  
+[data-theme="light"] .brand-logo-vivo{filter:none}  
+.copa-banner{background:linear-gradient(135deg,rgba(52,211,153,.1),rgba(0,212,255,.06),var(--card));border:1px solid rgba(52,211,153,.25);border-radius:20px;padding:28px;position:relative;overflow:hidden;margin-bottom:14px}  
+.copa-banner::before{content:'⚽';position:absolute;right:28px;top:50%;transform:translateY(-50%);font-size:80px;opacity:.07;pointer-events:none}  
+.ins-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;border-left:4px solid}  
+.ins-card h4{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;margin-bottom:10px}  
+.ins-card p{font-size:13px;color:var(--txt2);line-height:1.75;font-weight:300}  
+.ins-card strong{color:var(--txt);font-weight:600}  
+.ins-mini{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;border-top:3px solid}  
+.ins-mini h5{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;margin-bottom:8px}  
+.ins-mini p{font-size:12px;color:var(--txt2);line-height:1.65;font-weight:300}  
+.ins-mini strong{color:var(--txt);font-weight:600}  
+.ins-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:1280px;margin:0 auto;padding:0 52px 14px}  
+@media(max-width:700px){.ins-grid2{grid-template-columns:1fr;padding:0 20px 14px}}  
+@media print{body{background:#fff!important}#bg-canvas,.controls,.ctrl-btns,#scroll-top{display:none!important}.card{border:1px solid #ddd!important;background:#fff!important}@page{margin:1.2cm}}  
+.card,.season-banner,.copa-banner,.trio,.grid,.wom-row,.att-grid,.ins-card,.ins-mini{page-break-inside:avoid;break-inside:avoid}  
+  
+.sub-header{display:flex;align-items:center;gap:10px;margin:28px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border)}  
+.sub-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}  
+.sub-icon-sky{background:var(--sky-dim)}  
+.sub-icon-amber{background:var(--amber-dim)}  
+.sub-icon-violet{background:var(--violet-dim)}  
+.sub-icon-mint{background:var(--mint-dim)}  
+.sub-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--txt)}  
+.sub-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)}  
+  
+.card{box-shadow:0 0 0 1px rgba(13,148,136,.06) inset}  
+.card:hover{box-shadow:0 12px 40px rgba(13,148,136,.08),0 0 1px rgba(13,148,136,.2),0 0 30px rgba(13,148,136,.04)}  
+.card[data-accent="sky"]::before{background:linear-gradient(90deg,#22D3EE,#14B8A6)}  
+.hkpi{border-color:rgba(13,148,136,.15)}  
+.hkpi:hover{border-color:rgba(13,148,136,.3);box-shadow:0 0 20px rgba(13,148,136,.1)}  
+.bp-divider::before,.bp-divider::after{border-top-color:rgba(13,148,136,.15)}  
+.bp-divider-circle{border-color:rgba(13,148,136,.2)}  
+.att-item{border-color:rgba(13,148,136,.08)}  
+.att-item:hover{border-color:rgba(13,148,136,.2);box-shadow:0 0 15px rgba(13,148,136,.06)}  
+.trio-col{border-color:rgba(13,148,136,.1)}  
+.ins-card{border-color:rgba(13,148,136,.1)}  
+.ins-mini{border-color:rgba(13,148,136,.1)}  
+.wom-item{border-color:rgba(13,148,136,.08)}  
+.copa-banner{border-color:rgba(13,148,136,.2);background:linear-gradient(135deg,rgba(13,148,136,.08),rgba(52,211,153,.04),var(--card))}  
+.sub-header{border-bottom-color:rgba(13,148,136,.12)}  
+.sub-icon-sky{background:rgba(13,148,136,.12)}  
+.hl-box{border-color:rgba(13,148,136,.1)}  
+.season-banner{border-color:rgba(13,148,136,.15)}  
+.nav-tabs{border-color:rgba(13,148,136,.12);background:rgba(13,148,136,.04)}  
+.btn-ghost{border-color:rgba(13,148,136,.15)}  
+.btn-ghost:hover{border-color:rgba(13,148,136,.3);box-shadow:0 0 12px rgba(13,148,136,.08)}  
+.footer{border-top-color:rgba(13,148,136,.1)}  
+  
+.sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;background:rgba(8,8,15,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-right:1px solid rgba(13,148,136,.15);z-index:200;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding:20px 0}  
+.sidebar.open{transform:translateX(0)}  
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:199;opacity:0;pointer-events:none;transition:opacity .3s}  
+.sidebar-overlay.open{opacity:1;pointer-events:auto}  
+.sidebar-header{padding:16px 20px;border-bottom:1px solid rgba(13,148,136,.1);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}  
+.sidebar-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--txt)}  
+.sidebar-close{background:none;border:none;color:var(--txt2);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:all .2s}  
+.sidebar-close:hover{background:rgba(13,148,136,.12);color:var(--txt)}  
+.sidebar-section{padding:8px 16px 4px;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3)}  
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .2s;border:none;background:none;width:100%;text-align:left;font-family:'Outfit',sans-serif}  
+.sidebar-item:hover{background:rgba(13,148,136,.08);color:var(--txt)}  
+.sidebar-item.active{background:rgba(13,148,136,.12);color:var(--violet);border-right:3px solid var(--violet)}  
+.sidebar-icon{font-size:16px;width:24px;text-align:center;flex-shrink:0}  
+.menu-btn{display:flex;align-items:center;gap:7px;padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(13,148,136,.2);background:rgba(13,148,136,.06);color:var(--txt2);font-family:'Outfit',sans-serif;transition:all .2s}  
+.menu-btn:hover{background:rgba(13,148,136,.12);color:var(--txt);border-color:rgba(13,148,136,.3)}  
+@media print{.sidebar,.sidebar-overlay,.menu-btn{display:none!important}}  
+  
+.masthead-tech-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}  
+.masthead-tech-bg svg{position:absolute;width:100%;height:100%;opacity:.04}  
+.masthead-chip{position:absolute;border:1px solid rgba(13,148,136,.08);border-radius:4px}  
+.masthead-chip::before{content:'';position:absolute;width:2px;background:rgba(13,148,136,.06);left:50%;transform:translateX(-50%)}  
+.masthead-chip::after{content:'';position:absolute;height:2px;background:rgba(13,148,136,.06);top:50%;transform:translateY(-50%)}  
+.masthead-glow-1{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.12),transparent 70%);top:-100px;right:-50px;pointer-events:none}  
+.masthead-glow-2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.08),transparent 70%);bottom:-80px;left:10%;pointer-events:none}  
+.masthead-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(13,148,136,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}  
+  
+[data-theme="light"] .masthead{background:linear-gradient(160deg,#F0F0F8 0%,#E8E8F2 45%,#E0E0EE 100%);border-bottom-color:rgba(13,100,100,.1)}  
+[data-theme="light"] .masthead::before{background:radial-gradient(ellipse at center bottom,rgba(13,148,136,.08) 0%,rgba(0,212,255,.05) 40%,transparent 70%)}  
+[data-theme="light"] .masthead-grid{background-image:linear-gradient(rgba(13,100,100,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(13,100,100,.04) 1px,transparent 1px)}  
+[data-theme="light"] .masthead-glow-1{background:radial-gradient(circle,rgba(13,148,136,.06),transparent 70%)}  
+[data-theme="light"] .masthead-glow-2{background:radial-gradient(circle,rgba(0,212,255,.04),transparent 70%)}  
+[data-theme="light"] .masthead-tech-bg svg line{stroke:rgba(13,100,100,.06)!important}  
+[data-theme="light"] .masthead-tech-bg svg rect{stroke:rgba(13,100,100,.08)!important;fill:rgba(13,100,100,.02)!important}  
+[data-theme="light"] .masthead-tech-bg svg circle{fill:rgba(13,100,100,.08)!important}  
+[data-theme="light"] .brand-title{color:var(--txt)}  
+[data-theme="light"] .brand-sub{color:var(--txt2)}  
+[data-theme="light"] .eyebrow-text{color:#7C3AED}  
+[data-theme="light"] .hkpi{background:rgba(255,255,255,.7);border-color:rgba(13,100,100,.12)}  
+[data-theme="light"] .hkpi-label{color:var(--txt3)}  
+[data-theme="light"] .hkpi-sub{color:var(--txt2)}  
+[data-theme="light"] .controls{background:rgba(240,240,248,.92);border-bottom-color:rgba(13,100,100,.08)}  
+[data-theme="light"] .menu-btn{background:rgba(13,100,100,.06);border-color:rgba(13,100,100,.12);color:var(--txt2)}  
+[data-theme="light"] .menu-btn:hover{background:rgba(13,100,100,.1);color:var(--txt)}  
+[data-theme="light"] .btn-ghost{background:rgba(13,100,100,.05);border-color:rgba(13,100,100,.12);color:var(--txt2)}  
+[data-theme="light"] .btn-amber{background:linear-gradient(135deg,#0D9488,#14B8A6,#2DD4BF);color:#fff}  
+  
+.glossary{max-width:1280px;margin:0 auto;padding:0 52px 24px}  
+.glossary-toggle{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}  
+.glossary-toggle:hover .glossary-title{color:var(--txt)}  
+.glossary-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--txt2);transition:color .2s}  
+.glossary-arrow{font-size:18px;color:var(--txt3);transition:transform .3s}  
+.glossary-arrow.open{transform:rotate(180deg)}  
+.glossary-content{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}  
+.glossary-content.open{max-height:3000px}  
+.glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:20px 0}  
+@media(max-width:700px){.glossary-grid{grid-template-columns:1fr}}  
+.glossary-item{padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:border-color .2s}  
+.glossary-item:hover{border-color:var(--border2)}  
+.glossary-section-tag{display:inline-block;padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}  
+.glossary-term{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:4px}  
+.glossary-def{font-size:11px;color:var(--txt2);line-height:1.6;font-weight:300}  
+.glossary-source{display:flex;align-items:center;gap:8px;padding:16px 18px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;margin-bottom:8px}  
+.glossary-source-icon{font-size:18px;flex-shrink:0}  
+.glossary-source-info{flex:1}  
+.glossary-source-name{font-size:12px;font-weight:700;color:var(--txt);margin-bottom:2px}  
+.glossary-source-desc{font-size:10px;color:var(--txt3);line-height:1.5}  
+.glossary-source-tag{padding:3px 10px;border-radius:100px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;flex-shrink:0}  
+</style>  
+</head>  
+<body>  
+<canvas id="bg-canvas"></canvas>  
+<div class="page">  
+  
+<!-- MASTHEAD -->  
+<header class="masthead">  
+  <div class="masthead-tech-bg">  
+    <div class="masthead-grid"></div>  
+    <div class="masthead-glow-1"></div>  
+    <div class="masthead-glow-2"></div>  
+    <svg viewBox="0 0 1280 300" fill="none" xmlns="http://www.w3.org/2000/svg">  
+      <line x1="0" y1="80" x2="400" y2="80" stroke="rgba(13,148,136,.06)" stroke-width="1"/>  
+      <line x1="450" y1="80" x2="1280" y2="80" stroke="rgba(13,148,136,.04)" stroke-width="1" stroke-dasharray="8 4"/>  
+      <line x1="0" y1="160" x2="600" y2="160" stroke="rgba(20,184,166,.05)" stroke-width="1"/>  
+      <circle cx="400" cy="80" r="3" fill="rgba(13,148,136,.12)"/>  
+      <circle cx="600" cy="160" r="3" fill="rgba(20,184,166,.1)"/>  
+      <rect x="390" y="72" width="20" height="16" rx="3" stroke="rgba(13,148,136,.08)" fill="rgba(13,148,136,.02)" stroke-width="1"/>  
+    </svg>  
+  </div>  
+  <div class="masthead-inner">  
+    <div>  
+      <div class="eyebrow">  
+        <div class="eyebrow-line"></div>  
+        <span class="eyebrow-text">Comscore Plan Metrix · Agosto 2025</span>  
+      </div>  
+      <h1 class="brand-title">Defesa Comercial — Saúde</h1>  
+      <p class="brand-sub">Multi-Platform · Brasil · Total Audience · Estratégia de Dados</p>  
+    </div>  
+    <div class="header-kpis">  
+      <div class="hkpi"><div class="hkpi-label">Internet Total</div><div class="hkpi-val c-sky">117,3<span style="font-size:16px"> MM</span></div><div class="hkpi-sub">usuários únicos</div></div>  
+      <div class="hkpi"><div class="hkpi-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Terra_Logo.svg/500px-Terra_Logo.svg.png" class="hkpi-logo hkpi-logo-terra" crossorigin="anonymous" referrerpolicy="no-referrer"></div><div class="hkpi-val c-amber">59,0<span style="font-size:16px"> MM</span></div><div class="hkpi-sub">reach 50,4%</div></div>  
+      <div class="hkpi"><div class="hkpi-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Logo_VIVO.svg/960px-Logo_VIVO.svg.png" class="hkpi-logo hkpi-logo-vivo" crossorigin="anonymous" referrerpolicy="no-referrer"></div><div class="hkpi-val c-violet">21,9<span style="font-size:16px"> MM</span></div><div class="hkpi-sub">reach 18,6%</div></div>  
+    </div>  
+  </div>  
+</header>  
+  
+<!-- Sidebar -->  
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>  
+<nav class="sidebar" id="sidebar">  
+  <div class="sidebar-header">  
+    <span class="sidebar-title">Navegação</span>  
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>  
+  </div>  
+  <div class="sidebar-section">Dados de Audiência</div>  
+  <button class="sidebar-item active" onclick="goTo(0)"><span class="sidebar-icon">🌐</span>Internet Total</button>  
+  <button class="sidebar-item" onclick="goTo('terra')"><span class="sidebar-icon">🟠</span>Terra</button>  
+  <button class="sidebar-item" onclick="goTo('vivo')"><span class="sidebar-icon">🟣</span>Vivo</button>  
+  <div class="sidebar-section">Análises</div>  
+  <button class="sidebar-item" onclick="goTo('farmacia')"><span class="sidebar-icon">💊</span>Farmácias & Medicamentos</button>  
+  <button class="sidebar-item" onclick="goTo('atitudes')"><span class="sidebar-icon">🧠</span>Atitudes & Bem-Estar</button>  
+  <button class="sidebar-item" onclick="goTo('dieta')"><span class="sidebar-icon">🥗</span>Dieta & Alimentação</button>  
+  <button class="sidebar-item" onclick="goTo('exercicio')"><span class="sidebar-icon">🏃</span>Exercício & Fitness</button>  
+  <div class="sidebar-section">Vivo Ads</div>  
+  <button class="sidebar-item" onclick="goTo('vivoads')"><span class="sidebar-icon">📡</span>Vivo Ads Saúde</button>  
+  <button class="sidebar-item" onclick="goTo('vivoads')"><span class="sidebar-icon">👑</span>Público Premium</button>  
+</nav>  
+  
+<div class="controls">  
+  <button class="menu-btn" onclick="openSidebar()">☰ Menu</button>  
+  <div class="ctrl-btns">  
+    <button class="btn btn-ghost" onclick="toggleTheme()">☀ Tema</button>  
+    <button class="btn btn-amber" onclick="exportPDF()">📄 Exportar PDF</button>  
+  </div>  
+</div>  
+  
+<div class="page">  
+  
+<!-- ═══ SEÇÃO 1 — INTERNET TOTAL ═══ -->  
+<div class="section-wrap" id="top">  
+  <div class="sec-header"><div><h2 class="sec-title sec-title--internet">Internet Geral — Saúde & Bem-Estar</h2><p class="sec-desc">Base: 117,3 MM · Multi-Platform · Home & Work · Agosto 2025 · Segmento Saúde</p></div></div>  
+  
+  <div class="grid g4 anim" style="margin-bottom:14px">  
+    <div class="card anim-d1" data-accent="sky" data-glow="sky"><div class="kpi-lbl">Usuários Únicos</div><div class="kpi-val c-sky">117,3 MM</div><div class="kpi-sub">Internet Brasil · Multi-Platform</div></div>  
+    <div class="card anim-d2" data-accent="sky"><div class="kpi-lbl">Compram em Farmácias</div><div class="kpi-val c-sky">52,5%</div><div class="kpi-sub">61,6 MM · compradores L12m</div></div>  
+    <div class="card anim-d3" data-accent="sky"><div class="kpi-lbl">Pagam por Saúde</div><div class="kpi-val c-sky">82,1%</div><div class="kpi-sub">96,3 MM · qualquer preço</div></div>  
+    <div class="card anim-d4" data-accent="mint"><div class="kpi-lbl">Manter a Forma</div><div class="kpi-val c-mint">82,6%</div><div class="kpi-sub">96,8 MM · consideram importante</div></div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-sky">🧠</div><div class="sub-title">Atitudes sobre Saúde & Cuidado Pessoal</div><div class="sub-line"></div></div>  
+  <div class="card anim" style="margin-bottom:14px">  
+    <div class="kpi-lbl" style="margin-bottom:18px">🧠 Atitudes sobre Saúde · % que concordam</div>  
+    <div class="att-grid">  
+      <div class="att-item"><div class="att-pct c-sky">82,1%</div><div class="att-txt">Pago qualquer coisa pela saúde<br><span class="att-count c-sky">96,3 MM</span></div></div>  
+      <div class="att-item"><div class="att-pct c-sky">82,6%</div><div class="att-txt">Importante manter a forma<br><span class="att-count c-sky">96,8 MM</span></div></div>  
+      <div class="att-item"><div class="att-pct c-sky">69,1%</div><div class="att-txt">Genéricos são tão bons quanto<br><span class="att-count c-sky">81,1 MM</span></div></div>  
+      <div class="att-item"><div class="att-pct c-sky">67,4%</div><div class="att-txt">Só vou ao médico se muito doente<br><span class="att-count c-sky">79,0 MM</span></div></div>  
+      <div class="att-item"><div class="att-pct c-sky">58,4%</div><div class="att-txt">Confio em homeopatia<br><span class="att-count c-sky">68,5 MM</span></div></div>  
+      <div class="att-item"><div class="att-pct c-sky">55,3%</div><div class="att-txt">Faço check-up mesmo bem<br><span class="att-count c-sky">64,9 MM</span></div></div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-sky">💊</div><div class="sub-title">Farmácias & Medicamentos</div><div class="sub-line"></div></div>  
+  <div class="grid g3 anim" style="margin-bottom:14px">  
+    <div class="card" data-accent="sky"><div class="kpi-lbl">Compraram em Farmácia (L12m)</div><div class="kpi-val c-sky">61,6 MM</div><div class="kpi-sub">Composição: 52,5% · Reach: —</div></div>  
+    <div class="card" data-accent="sky"><div class="kpi-lbl">Compram Remédios</div><div class="kpi-val c-sky">57,1 MM</div><div class="kpi-sub">Composição: 48,7% da internet</div></div>  
+    <div class="card" data-accent="sky"><div class="kpi-lbl">Gastam R$270+/mês</div><div class="kpi-val c-sky">15,5 MM</div><div class="kpi-sub">Composição: 13,2% · high-value</div></div>  
+  </div>  
+  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏪 Redes de Farmácia — Preferência</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogasil</span><span class="bar-pct c-sky">20,8 MM · 17,8%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="100"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Farmácias Associadas</span><span class="bar-pct c-sky">18,3 MM · 15,6%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="88"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Pague Menos</span><span class="bar-pct c-sky">11,8 MM · 10,0%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="57"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">💰 Gasto Mensal em Farmácia (R$)</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">R$270+</span><span class="bar-pct c-sky">15,5 MM · 13,2%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="100"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">R$91–R$150</span><span class="bar-pct c-sky">10,5 MM · 9,0%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="68"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">R$31–R$90</span><span class="bar-pct c-sky">13,4 MM · 11,5%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="86"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-mint">🩺</div><div class="sub-title">Medicamentos & Tratamentos</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">💊 Categorias de Medicamentos — Uso L12m</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Gripe / Tosse / Garganta</span><span class="bar-pct c-sky">54,5 MM · 46,5%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="100"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Analgésicos</span><span class="bar-pct c-sky">50,6 MM · 43,1%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="93"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dor Muscular</span><span class="bar-pct c-sky">31,9 MM · 27,2%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="59"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Repelente</span><span class="bar-pct c-mint">26,3 MM · 22,5%</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="48"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Vitaminas / Suplementos</span><span class="bar-pct c-mint">25,1 MM · 21,4%</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="46"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Estômago / Digestão</span><span class="bar-pct c-mint">18,3 MM · 15,6%</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="34"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Intestino</span><span class="bar-pct c-mint">15,1 MM · 12,9%</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="28"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏆 Marcas — Analgésicos & Dor Muscular</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dorflex (Total)</span><span class="bar-pct c-amber">22,7 MM · 19,4%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="100"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dorflex Comprimidos</span><span class="bar-pct c-amber">21,5 MM · 18,4%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="95"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Benegrip (Total)</span><span class="bar-pct c-amber">12,1 MM · 10,3%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="53"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-sky">🥗</div><div class="sub-title">Dieta, Alimentação & Bem-Estar</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🥗 Atitudes sobre Alimentação</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Pago mais por qualidade</span><span class="bar-pct c-mint">76,9% · 90,2 MM</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="77"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Gosto de experimentar</span><span class="bar-pct c-mint">60,4% · 70,8 MM</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="60"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta equilibrada</span><span class="bar-pct c-mint">52,1% · 61,0 MM</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="52"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Orgânico vale mais</span><span class="bar-pct c-mint">50,9% · 59,7 MM</span></div><div class="bar-track"><div class="bar-fill bf-mint" data-w="51"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Conto calorias</span><span class="bar-pct c-sky">42,5% · 49,9 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="43"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Plant-based</span><span class="bar-pct c-sky">33,8% · 39,6 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="34"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏃 Exercício & Atividade Física</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Exercício 1x/semana</span><span class="bar-pct c-sky">51,0% · 59,8 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="51"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Me esforço pela forma</span><span class="bar-pct c-sky">47,1% · 55,2 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="47"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Preciso exercitar p/ me sentir bem</span><span class="bar-pct c-sky">45,3% · 53,1 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="45"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Não gosto mas sei que é saudável</span><span class="bar-pct c-amber">62,4% · 73,2 MM</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="62"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Falta disciplina</span><span class="bar-pct c-coral">44,5% · 52,2 MM</span></div><div class="bar-track"><div class="bar-fill bf-coral" data-w="45"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Tentando emagrecer</span><span class="bar-pct c-coral">42,3% · 49,6 MM</span></div><div class="bar-track"><div class="bar-fill bf-coral" data-w="42"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-sky">📝</div><div class="sub-title">Insights Estratégicos — Internet Geral</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="ins-card" style="border-left-color:var(--sky)">  
+      <h4 style="color:var(--sky)">Saúde Não Tem Preço: 96,3 MM</h4>  
+      <p><strong>82,1% pagariam qualquer coisa pela saúde</strong> e <strong>82,6% consideram importante manter a forma</strong>. O brasileiro investe em saúde — mas <strong>67,4% só vão ao médico se muito doentes</strong>. O gap entre intenção e ação é a oportunidade: conteúdo educativo + farmácias digitais.</p>  
+    </div>  
+    <div class="ins-card" style="border-left-color:var(--mint)">  
+      <h4 style="color:var(--mint)">Farmácia é Hábito: 61,6 MM compradores</h4>  
+      <p><strong>52,5% compraram em farmácia nos últimos 12 meses</strong>. Drogasil lidera (20,8 MM), seguida por farmácias associadas (18,3 MM). <strong>48,7% compram remédios</strong> e <strong>13,2% gastam R$270+/mês</strong> — audiência high-value para saúde.</p>  
+    </div>  
+  </div>  
+  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="ins-card" style="border-left-color:var(--amber)">  
+      <h4 style="color:var(--amber)">Dorflex: a Marca da Dor Brasileira</h4>  
+      <p>Dorflex alcança <strong>22,7 MM (19,4%)</strong> — a marca de analgésico mais usada do país. <strong>54,5 MM usaram remédio para gripe</strong> (46,5%) e <strong>31,9 MM para dor muscular</strong> (27,2%). O brasileiro se automedica — e busca informação online.</p>  
+    </div>  
+    <div class="ins-card" style="border-left-color:var(--coral)">  
+      <h4 style="color:var(--coral)">Dieta & Fitness: Intenção vs Realidade</h4>  
+      <p><strong>33,1% controlam dieta</strong> (38,9 MM) — maioria para emagrecer (21,7%). Mas <strong>44,5% admitem falta de disciplina</strong> e <strong>62,4% não gostam mas sabem que exercício é saudável</strong>. O mercado de wellness cresce no gap entre desejo e execução.</p>  
+    </div>  
+  </div>  
+</div>  
+  
+</div>  
+  
+<div class="bp-divider" id="terra"><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div></div>  
+  
+<!-- ═══ SEÇÃO 2 — TERRA ═══ -->  
+<div class="section-wrap">  
+  <div class="sec-header"><div><h2 class="sec-title sec-title--terra"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Terra_Logo.svg/500px-Terra_Logo.svg.png" class="sec-logo sec-logo-terra" crossorigin="anonymous" referrerpolicy="no-referrer">| Dados de Audiência Saúde</h2><p class="sec-desc">Perfil da audiência Terra no segmento Saúde & Bem-Estar · Agosto 2025</p></div></div>  
+  
+  <div class="grid g4 anim" style="margin-bottom:14px">  
+    <div class="card anim-d1" data-accent="amber" data-glow="amber"><div class="kpi-lbl">Usuários Terra</div><div class="kpi-val c-amber">59,0 MM</div><div class="kpi-sub">Reach 50,4% da internet</div></div>  
+    <div class="card anim-d2" data-accent="amber"><div class="kpi-lbl">Farmácia (compradores)</div><div class="kpi-val c-amber">R 52,9%</div><div class="kpi-sub">32,6 MM alcançáveis</div></div>  
+    <div class="card anim-d3" data-accent="amber"><div class="kpi-lbl">Dor Muscular (usuários)</div><div class="kpi-val c-amber">R 55,0%</div><div class="kpi-sub">17,5 MM · acima da média</div></div>  
+    <div class="card anim-d4" data-accent="mint"><div class="kpi-lbl">Homeopatia (confiam)</div><div class="kpi-val c-mint">R 53,6%</div><div class="kpi-sub">36,7 MM · sobre-representado</div></div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-amber">🧠</div><div class="sub-title">Atitudes Saúde — Composição & Reach Terra</div><div class="sub-line"></div></div>  
+  <div class="card anim" style="margin-bottom:14px">  
+    <div class="kpi-lbl" style="margin-bottom:18px">🧠 Atitudes Saúde · Terra · Comp% e Reach</div>  
+    <div class="att-grid">  
+      <div class="att-item"><div class="att-pct c-amber">83,8%</div><div class="att-txt">Pago qualquer coisa pela saúde<br><span class="att-count c-amber">C 83,8% · R 51,4%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-amber">83,2%</div><div class="att-txt">Importante manter a forma<br><span class="att-count c-amber">C 83,2% · R 50,7%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-amber">71,3%</div><div class="att-txt">Genéricos são eficazes<br><span class="att-count c-amber">C 71,3% · R 51,9%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-amber">62,2%</div><div class="att-txt">Confio em homeopatia<br><span class="att-count c-amber">C 62,2% · R 53,6%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-amber">58,6%</div><div class="att-txt">Faço check-up preventivo<br><span class="att-count c-amber">C 58,6% · R 53,4%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-amber">54,8%</div><div class="att-txt">Como e bebo de forma saudável<br><span class="att-count c-amber">C 54,8% · R 53,9%</span></div></div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-amber">💊</div><div class="sub-title">Farmácias & Medicamentos — Reach Terra</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏪 Farmácias — Reach Terra</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Farmácias Associadas</span><span class="bar-pct c-amber">R 56,6%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="56.6"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Pague Menos</span><span class="bar-pct c-amber">R 56,2%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="56.2"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogasil</span><span class="bar-pct c-amber">R 54,6%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="54.6"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogaria São Paulo</span><span class="bar-pct c-amber">R 48,8%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="48.8"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">💊 Medicamentos — Reach Terra</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dorflex (dor muscular)</span><span class="bar-pct c-amber">R 55,5%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="55.5"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Neocoflan</span><span class="bar-pct c-amber">R 60,1%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="60.1"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Compram Remédios</span><span class="bar-pct c-amber">R 53,7%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="53.7"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Benegrip (gripe)</span><span class="bar-pct c-amber">R 51,7%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="51.7"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-amber">🥗</div><div class="sub-title">Dieta & Exercício — Terra</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🥗 Dieta & Alimentação · Terra</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Controlam dieta</span><span class="bar-pct c-amber">C 34,2% · R 52,0%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="52"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta p/ emagrecer</span><span class="bar-pct c-amber">C 22,8% · R 53,1%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="53.1"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta +3 anos</span><span class="bar-pct c-amber">C 11,0% · R 59,6%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="59.6"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta equilibrada</span><span class="bar-pct c-amber">C 54,5% · R 52,7%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="52.7"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏃 Exercício · Terra</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Exercício 1x/semana</span><span class="bar-pct c-amber">C 48,3% · R 47,7%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="47.7"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Esforço pela forma</span><span class="bar-pct c-amber">C 49,0% · R 52,4%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="52.4"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Come saudável sempre</span><span class="bar-pct c-amber">C 54,8% · R 53,9%</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="53.9"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-amber">📝</div><div class="sub-title">Insights Estratégicos — Terra</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="ins-card" style="border-left-color:var(--amber)">  
+      <h4 style="color:var(--amber)">Terra: O Canal do Cuidado Preventivo</h4>  
+      <p>O Terra alcança <strong>R 53,4% de quem faz check-up preventivo</strong> e <strong>R 53,9% de quem come saudável sempre</strong>. Audiência 45+ com R 65,7% — o perfil que mais gasta em farmácia. <strong>Conteúdo de wellness e prevenção</strong> gera conversão editorial direta.</p>  
+    </div>  
+    <div class="ins-card" style="border-left-color:var(--amber)">  
+      <h4 style="color:var(--amber)">Dor Muscular: R 55-60% no Terra</h4>  
+      <p>Dorflex alcança <strong>R 55,5%</strong> e Neocoflan <strong>R 60,1%</strong> no Terra — acima da média. Farmácias associadas com <strong>R 56,6%</strong>. O Terra é o canal ideal para campanhas de <strong>OTC, dor e autocuidado</strong>.</p>  
+    </div>  
+  </div>  
+</div>  
+  
+<div class="bp-divider" id="vivo"><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div></div>  
+  
+<!-- ═══ SEÇÃO 3 — VIVO ═══ -->  
+<div class="section-wrap">  
+  <div class="sec-header"><div><h2 class="sec-title sec-title--vivo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Logo_VIVO.svg/960px-Logo_VIVO.svg.png" class="sec-logo sec-logo-vivo" crossorigin="anonymous" referrerpolicy="no-referrer">| Dados de Audiência Saúde</h2><p class="sec-desc">Base Vivo no segmento Saúde & Bem-Estar · Agosto 2025</p></div></div>  
+  
+  <div class="grid g4 anim" style="margin-bottom:14px">  
+    <div class="card anim-d1" data-accent="violet" data-glow="violet"><div class="kpi-lbl">Base Vivo</div><div class="kpi-val c-violet">21,9 MM</div><div class="kpi-sub">Reach 18,6%</div></div>  
+    <div class="card anim-d2" data-accent="violet"><div class="kpi-lbl">Farmácia (compradores)</div><div class="kpi-val c-violet">R 20,2%</div><div class="kpi-sub">12,4 MM · sobre-representado</div></div>  
+    <div class="card anim-d3" data-accent="violet"><div class="kpi-lbl">Controlam Dieta</div><div class="kpi-val c-violet">R 20,7%</div><div class="kpi-sub">8,1 MM · acima da média</div></div>  
+    <div class="card anim-d4" data-accent="coral"><div class="kpi-lbl">SUS (usam apenas)</div><div class="kpi-val c-coral">R 20,4%</div><div class="kpi-sub">14,2 MM · perfil popular</div></div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-violet">🧠</div><div class="sub-title">Atitudes Saúde — Composição & Reach Vivo</div><div class="sub-line"></div></div>  
+  <div class="card anim" style="margin-bottom:14px">  
+    <div class="kpi-lbl" style="margin-bottom:18px">🧠 Atitudes Saúde · Vivo · Comp% e Reach</div>  
+    <div class="att-grid">  
+      <div class="att-item"><div class="att-pct c-violet">85,9%</div><div class="att-txt">Pago qualquer coisa pela saúde<br><span class="att-count c-violet">C 85,9% · R 19,5%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-violet">69,7%</div><div class="att-txt">Só vou ao médico se muito doente<br><span class="att-count c-violet">C 69,7% · R 19,3%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-violet">65,0%</div><div class="att-txt">Uso apenas SUS<br><span class="att-count c-violet">C 65,0% · R 20,4%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-violet">60,9%</div><div class="att-txt">Confio em homeopatia<br><span class="att-count c-violet">C 60,9% · R 19,4%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-violet">56,0%</div><div class="att-txt">Dieta equilibrada<br><span class="att-count c-violet">C 56,0% · R 20,1%</span></div></div>  
+      <div class="att-item"><div class="att-pct c-violet">49,3%</div><div class="att-txt">Exercício 1x/semana<br><span class="att-count c-violet">C 49,3% · R 18,0%</span></div></div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-violet">💊</div><div class="sub-title">Farmácias & Medicamentos — Reach Vivo</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏪 Farmácias — Reach Vivo</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Farmácias Associadas</span><span class="bar-pct c-violet">R 21,3%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="21.3"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Frequência mensal</span><span class="bar-pct c-violet">R 21,9%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="21.9"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Compram remédios</span><span class="bar-pct c-violet">R 20,5%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="20.5"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogasil</span><span class="bar-pct c-violet">R 19,0%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="19"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogaria São Paulo</span><span class="bar-pct c-violet">R 20,1%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="20.1"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">💊 Medicamentos — Reach Vivo</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dor muscular (usuários)</span><span class="bar-pct c-violet">R 20,6%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="20.6"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dorflex comprimidos</span><span class="bar-pct c-violet">R 19,8%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="19.8"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Neocoflan</span><span class="bar-pct c-violet">R 23,7%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="23.7"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Repelente (usuários)</span><span class="bar-pct c-violet">R 19,6%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="19.6"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Dieta p/ emagrecer</span><span class="bar-pct c-violet">R 20,8%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="20.8"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-violet">📝</div><div class="sub-title">Insights Estratégicos — Vivo</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="ins-card" style="border-left-color:var(--violet)">  
+      <h4 style="color:var(--violet)">Vivo: Canal do Consumidor de Saúde Popular</h4>  
+      <p>A base Vivo tem <strong>65% usando apenas SUS</strong> (R 20,4%) e <strong>69,7% só vão ao médico se muito doentes</strong>. É o perfil que mais precisa de <strong>conteúdo educativo sobre prevenção</strong> e ofertas acessíveis de farmácia. Push com cupons de desconto em OTC é ouro.</p>  
+    </div>  
+    <div class="ins-card" style="border-left-color:var(--coral)">  
+      <h4 style="color:var(--coral)">Dieta & Emagrecimento: R 20,7-20,8%</h4>  
+      <p><strong>36,8% da base Vivo controlam dieta</strong> (acima dos 33,1% da internet) e <strong>R 20,8% nos que fazem dieta para emagrecer</strong>. Canal ideal para apps de nutrição, suplementos e programas de emagrecimento com <strong>preço acessível</strong>.</p>  
+    </div>  
+  </div>  
+</div>  
+  
+  
+<div class="bp-divider" id="vivoads"><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div><div class="bp-divider-circle"></div></div>  
+  
+<!-- ═══ VIVO ADS — SAÚDE ═══ -->  
+<div class="section-wrap">  
+  <div class="sec-header"><div><h2 class="sec-title sec-title--vivo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Logo_VIVO.svg/960px-Logo_VIVO.svg.png" class="sec-logo sec-logo-vivo" crossorigin="anonymous" referrerpolicy="no-referrer">Vivo Ads · Dados First-Party Saúde</h2><p class="sec-desc">Audiências first-party Vivo Ads no segmento Saúde & Bem-Estar. Share % dentro de cada categoria.</p></div></div>  
+  
+  <div class="grid g4 anim" style="margin-bottom:14px">  
+    <div class="card" data-accent="violet" data-glow="violet"><div class="kpi-lbl">Beleza</div><div class="kpi-val c-violet">5,8 MM</div><div class="kpi-sub">apps de beleza e cuidados</div></div>  
+    <div class="card" data-accent="violet"><div class="kpi-lbl">Farmácia</div><div class="kpi-val c-violet">4,3 MM</div><div class="kpi-sub">apps de farmácia e saúde</div></div>  
+    <div class="card" data-accent="violet"><div class="kpi-lbl">Atividade Física</div><div class="kpi-val c-violet">3,7 MM</div><div class="kpi-sub">apps de exercício e fitness</div></div>  
+    <div class="card" data-accent="sky"><div class="kpi-lbl">Plano de Saúde</div><div class="kpi-val c-sky">2,1 MM</div><div class="kpi-sub">apps de planos de saúde</div></div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-violet">💊</div><div class="sub-title">Ecossistema Saúde na Base Vivo — Categorias</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">💊 Saúde & Bem-Estar — Volume por Categoria</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Beleza</span><span class="bar-pct c-violet">5,8 MM</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="100"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Farmácia</span><span class="bar-pct c-violet">4,3 MM</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="74"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Atividade Física</span><span class="bar-pct c-violet">3,7 MM</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="64"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Plano de Saúde</span><span class="bar-pct c-sky">2,1 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="36"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Plano Tradicional</span><span class="bar-pct c-sky">1,7 MM</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="29"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Nutrição / Dieta</span><span class="bar-pct c-sky">436K</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="8"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🧘 Wellness & Profissionais</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Profissionais Saúde</span><span class="bar-pct c-violet">283K</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="100"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Meditação</span><span class="bar-pct c-violet">222K</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="79"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Startups de Saúde</span><span class="bar-pct c-sky">212K</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="75"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-violet">🏪</div><div class="sub-title">Farmácias — Share por App (% da categoria)</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏪 Farmácias — 4,3 MM usuários (share %)</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Droga Raia</span><span class="bar-pct c-violet">54,0%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="54"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogasil</span><span class="bar-pct c-violet">47,3%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="47.3"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Pague Menos</span><span class="bar-pct c-sky">21,2%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="21.2"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogaria SP</span><span class="bar-pct c-sky">16,5%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="16.5"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Drogaria Pacheco</span><span class="bar-pct c-sky">14,2%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="14.2"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏋️ Atividade Física — 3,7 MM usuários (share %)</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Strava</span><span class="bar-pct c-violet">39,8%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="39.8"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Gympass (Wellhub)</span><span class="bar-pct c-violet">25,1%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="25.1"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Smart Fit</span><span class="bar-pct c-violet">17,3%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="17.3"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">TotalPass</span><span class="bar-pct c-sky">15,3%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="15.3"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Garmin</span><span class="bar-pct c-sky">7,9%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="7.9"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏥 Planos de Saúde — Tradicionais (share %)</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Unimed</span><span class="bar-pct c-violet">37,8%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="37.8"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Amil</span><span class="bar-pct c-violet">24,4%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="24.4"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">NotreDame Intermédica</span><span class="bar-pct c-violet">20,2%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="20.2"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Bradesco Saúde</span><span class="bar-pct c-sky">15,2%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="15.2"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🌸 Beleza — Top Apps (share %)</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Natura</span><span class="bar-pct c-violet">51,5%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="51.5"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Beleza na Web</span><span class="bar-pct c-violet">35,6%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="35.6"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">O Boticário</span><span class="bar-pct c-violet">15,8%</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="15.8"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Eudora</span><span class="bar-pct c-sky">14,3%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="14.3"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Sephora</span><span class="bar-pct c-sky">6,4%</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="6.4"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-amber">👑</div><div class="sub-title">Público Premium (Classe A) — Audiências Ativáveis</div><div class="sub-line"></div></div>  
+  <div class="grid g4 anim" style="margin-bottom:14px">  
+    <div class="card" data-accent="amber" data-glow="amber"><div class="kpi-lbl">Elite Brasileira</div><div class="kpi-val c-amber">4,3 MM</div><div class="kpi-sub">Display · 1,6 MM YouTube</div></div>  
+    <div class="card" data-accent="amber"><div class="kpi-lbl">Marcas de Luxo</div><div class="kpi-val c-amber">3,9 MM</div><div class="kpi-sub">Display · 1,5 MM YouTube</div></div>  
+    <div class="card" data-accent="amber"><div class="kpi-lbl">Plano Pós-Pago</div><div class="kpi-val c-amber">4,0 MM</div><div class="kpi-sub">Display · 2,5 MM YouTube</div></div>  
+    <div class="card" data-accent="sky"><div class="kpi-lbl">Platinum Vivo</div><div class="kpi-val c-sky">1,0 MM</div><div class="kpi-sub">Display · 630K YouTube</div></div>  
+  </div>  
+  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">👑 Audiências Premium — Display Size</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Sênior Vida Confortável</span><span class="bar-pct c-amber">20 MM · 9 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="100"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Baixo Risco Serasa</span><span class="bar-pct c-amber">12 MM · 8,2 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="60"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Elite Brasileira</span><span class="bar-pct c-amber">4,3 MM · 1,6 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="22"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Pós-Pago</span><span class="bar-pct c-amber">4,0 MM · 2,5 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="20"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Marcas de Luxo</span><span class="bar-pct c-amber">3,9 MM · 1,5 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-amber" data-w="20"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Gold Vivo</span><span class="bar-pct c-sky">2,0 MM · 1,3 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="10"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Platinum Vivo</span><span class="bar-pct c-sky">1,0 MM · 630K YT</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="5"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Shoppings Luxo (geo)</span><span class="bar-pct c-sky">330K · 140K YT</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="2"></div></div></div>  
+      </div>  
+    </div>  
+    <div class="card">  
+      <div class="kpi-lbl" style="margin-bottom:16px">🏥 Saúde Premium — Audiências Track</div>  
+      <div class="bars">  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Beleza (track)</span><span class="bar-pct c-violet">20 MM · 7,9 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="100"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Atividade Física</span><span class="bar-pct c-violet">11 MM · 4,5 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="55"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">PJ Saúde Humana</span><span class="bar-pct c-violet">9,6 MM · 3,8 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-violet" data-w="48"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Farmácia (track)</span><span class="bar-pct c-sky">4,6 MM · 1,9 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="23"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Startup Saúde</span><span class="bar-pct c-sky">3,4 MM · 1,4 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="17"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Plano de Saúde</span><span class="bar-pct c-sky">2,8 MM · 1,2 MM YT</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="14"></div></div></div>  
+        <div class="bar-item"><div class="bar-row"><span class="bar-lbl">Estudantes Medicina</span><span class="bar-pct c-sky">220K · 95K YT</span></div><div class="bar-track"><div class="bar-fill bf-sky" data-w="1"></div></div></div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <div class="sub-header"><div class="sub-icon sub-icon-violet">📝</div><div class="sub-title">Insights — Vivo Ads Saúde & Público Premium</div><div class="sub-line"></div></div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="ins-card" style="border-left-color:var(--violet)">  
+      <h4 style="color:var(--violet)">Droga Raia + Drogasil = 100% do Topo</h4>  
+      <p>O grupo RaiaDrogasil domina: <strong>Droga Raia (54%) + Drogasil (47,3%)</strong> somam praticamente toda a audiência de farmácia. Pague Menos (21,2%) e Drogaria SP (16,5%) completam. Dados first-party permitem <strong>segmentação por rede real de compra</strong>.</p>  
+    </div>  
+    <div class="ins-card" style="border-left-color:var(--amber)">  
+      <h4 style="color:var(--amber)">Público Premium: 4,3 MM da Elite</h4>  
+      <p><strong>4,3 MM na "Elite Brasileira"</strong> + 3,9 MM em marcas de luxo + 12 MM baixo risco Serasa. O cruzamento <strong>Elite × Saúde Premium</strong> (Einstein 253K, Fleury 167K, Sírio 37K) permite atingir o consumidor de saúde de alto ticket com precisão.</p>  
+    </div>  
+  </div>  
+  <div class="grid g2 anim" style="margin-bottom:14px">  
+    <div class="ins-card" style="border-left-color:var(--sky)">  
+      <h4 style="color:var(--sky)">Strava Lidera Fitness: 39,8% de Share</h4>  
+      <p><strong>Strava (39,8%) + Gympass (25,1%) + Smart Fit (17,3%)</strong> = 82% do fitness digital. Audiência ativa, saudável e com renda. Ideal para campanhas de <strong>suplementos, wearables, seguros saúde e nutrição esportiva</strong>.</p>  
+    </div>  
+    <div class="ins-card" style="border-left-color:var(--violet)">  
+      <h4 style="color:var(--violet)">Unimed Lidera Planos: 37,8%</h4>  
+      <p><strong>Unimed (37,8%) + Amil (24,4%) + NotreDame (20,2%)</strong> = 82% dos planos tradicionais. Einstein (253K), Fleury (167K) e Doctoralia (517K) completam o ecossistema premium. Push para <strong>upgrade de plano e agendamento de consulta</strong>.</p>  
+    </div>  
+  </div>  
+</div>  
+  
+<!-- FOOTER -->  
+<footer class="footer">  
+  <div class="footer-copy"><strong>©2026 Comscore, Inc.</strong> · Plan Metrix Audience Profile · Agosto 2025<br>Multi-Platform · Brasil · Total Audience · Segmento Saúde & Bem-Estar</div>  
+</footer>  
+  
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">↑</button>  
+  
+</div>  
+  
+<script>  
+const scrollTopBtn=document.getElementById('scroll-top');  
+window.addEventListener('scroll',()=>{scrollTopBtn.classList.toggle('visible',window.scrollY>400)},{passive:true});  
+function toggleTheme(){document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark'}  
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('open')}  
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open')}  
+function goTo(id){closeSidebar();setTimeout(()=>{if(id===0){window.scrollTo({top:0,behavior:'smooth'});return}const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},200);document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));event.target.closest('.sidebar-item').classList.add('active')}  
+function exportPDF(){window.print()}  
+  
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('vis');e.target.querySelectorAll('.bar-fill[data-w]').forEach(f=>{f.style.width=f.dataset.w+'%';f.removeAttribute('data-w')});io.unobserve(e.target)})},{threshold:0.08});  
+document.querySelectorAll('.anim,.card,.trio-col').forEach(el=>{if(!el.classList.contains('anim'))el.classList.add('anim');io.observe(el)});  
+  
+(function(){const c=document.getElementById('bg-canvas'),x=c.getContext('2d');const t=['DNA','RNA','💊','🩺','♥','O₂','H₂O','pH','BMI','ECG','SPF','UV','IMC','Rx','SUS'];let cells=[];function build(){cells=[];const W=c.width,H=c.height;const cW=200,rH=60,cols=Math.ceil(W/cW)+1,rows=Math.ceil(H/rH)+1;for(let r=0;r<rows;r++)for(let cl=0;cl<cols;cl++){cells.push({x:cl*cW+(r%2)*cW*.5+(Math.random()-.5)*28,y:r*rH+(Math.random()-.5)*14,t:t[Math.floor(Math.random()*t.length)],s:10+Math.floor(Math.random()*3),a:.028+Math.random()*.022})}}function draw(){x.clearRect(0,0,c.width,c.height);const d=document.documentElement.dataset.theme!=='light';cells.forEach(cl=>{x.font=`400 ${cl.s}px 'Space Mono',monospace`;x.fillStyle=d?`rgba(13,148,136,${cl.a})`:`rgba(13,100,100,${cl.a*1.4})`;x.fillText(cl.t,cl.x,cl.y)})}function resize(){c.width=window.innerWidth;c.height=Math.max(document.body.scrollHeight,window.innerHeight);build();draw()}document.fonts.load("400 12px 'Space Mono'").then(resize).catch(resize);new MutationObserver(()=>draw()).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});let raf;window.addEventListener('resize',()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(resize)});let lH=0;setInterval(()=>{const h=Math.max(document.body.scrollHeight,window.innerHeight);if(h!==lH){lH=h;resize()}},900)})();  
+</script>  
+</body>  
+</html>  
